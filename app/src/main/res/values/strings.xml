@@ -2,4 +2,13 @@
     <string name="app_name">GuessTheStar</string>
     <string name="guess_the_star">Guess The Star</string>
     <string name="start">Start</string>
+
+
+    <string-array name="name">
+        <item> name 1</item>
+        <item> name 2</item>
+        <item> name 3</item>
+    </string-array>
+
+
 </resources>
