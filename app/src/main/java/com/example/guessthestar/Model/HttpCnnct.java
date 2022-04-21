@@ -1,10 +1,11 @@
 package com.example.guessthestar.Model;
 
-import android.annotation.SuppressLint;
+
+import static com.example.guessthestar.Model.DataStarClass.getSizeArrayListStars;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.guessthestar.Presenter.Presenter;
 import com.example.guessthestar.Presenter.StarClass;
 
 import java.io.BufferedReader;
@@ -14,23 +15,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HttpCnnct {
 
-    public static ArrayList<StarClass> arrayListStars = new ArrayList<>();
-    private String URL = "https://ru.wikipedia.org/wiki/100_%D0%B2%D0%B5%D0%BB%D0%B8%D1%87%D0%B0%D0%B9%D1%88%D0%B8%D1%85_%D0%B7%D0%B2%D1%91%D0%B7%D0%B4_%D0%BA%D0%B8%D0%BD%D0%BE_%D0%B7%D0%B0_100_%D0%BB%D0%B5%D1%82_%D0%BF%D0%BE_%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B8_AFI";
 
-
-    public HttpCnnct() {
-                                                                                 Log.i("ОТЛАДКА","HttpCnnct :: start " );
+    public HttpCnnct(String URL) {
+                                                                                 //Log.i("ОТЛАДКА","HttpCnnct :: start " );
         RequestTask requestTask = new RequestTask();
         requestTask.execute(URL);
-        //requestTask.execute(URL).get();
-                                                                                 Log.i("ОТЛАДКА","HttpCnnct :: stop " );
+                                                                                 //Log.i("ОТЛАДКА","HttpCnnct :: stop " );
     }
 
 
@@ -38,7 +33,7 @@ public class HttpCnnct {
 
         @Override
         protected Void doInBackground(String... strings) {
-                                                                             Log.i("ОТЛАДКА","RequestTask :: start " );
+                                                                             //Log.i("ОТЛАДКА","HttpCnnct :: RequestTask :: start " );
             HttpURLConnection urlConnection = null;
             try {
                 URL url = new URL(strings[0]);
@@ -68,7 +63,8 @@ public class HttpCnnct {
             }
 
 
-            if (arrayListStars == null) Log.i("ОТЛАДКА","RequestTask :: findPatternLine ::  звезд не найдено" );
+            if (getSizeArrayListStars() < 1) Log.i("ОТЛАДКА","RequestTask :: findPatternLine ::  звезд не найдено" );
+            else  Log.i("ОТЛАДКА","HttpCnnct :: RequestTask :: stop :: звезды определены " );
 
             return null;
         }
@@ -84,7 +80,9 @@ public class HttpCnnct {
             String ava = findPatternAva(matcher.group(1));
             if(name!=null && ava!=null){
                // Log.i("ОТЛАДКА","RequestTask :: findPatternLine ::  еть новая звезда " + name );
-                arrayListStars.add(new StarClass(ava, name));
+
+                DataStarClass.setStar(new StarClass(ava, name));
+
             }
         }
     }

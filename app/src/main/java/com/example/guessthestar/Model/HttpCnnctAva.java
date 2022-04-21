@@ -18,7 +18,7 @@ public class HttpCnnctAva {
 
 
     public Bitmap downlodeAva(String urlStr){
-                                                                            //Log.i("ОТЛАДКА","downlodeAva :: start " );
+                                                                            //Log.i("ОТЛАДКА","HttpCnnctAva :: downlodeAva :: start " );
         RequestTaskAva task = new RequestTaskAva();
         try {
             bitmap = task.execute(urlStr).get();
@@ -29,7 +29,7 @@ public class HttpCnnctAva {
             //e.printStackTrace();
             Log.i("ОТЛАДКА","HttpCnnctAva.downlodeAva :: InterruptedException :: ERROR =  " + e );
         }
-                                                                             //Log.i("ОТЛАДКА","downlodeAva :: stop " );
+                                                                            // Log.i("ОТЛАДКА","HttpCnnctAva :: downlodeAva :: stop " );
         return bitmap;
     }
 
@@ -42,7 +42,7 @@ public class HttpCnnctAva {
 
         @Override
         protected Bitmap doInBackground(String... strings) {
-                                                                            Log.i("ОТЛАДКА","RequestTaskAva :: cкачиваем аву в потоке " );
+                                                                            //Log.i("ОТЛАДКА","HttpCnnctAva :: RequestTaskAva :: cкачиваем аву в потоке " );
             URL url = null;
             HttpURLConnection urlConnection = null;
             try {
@@ -54,7 +54,7 @@ public class HttpCnnctAva {
 
 
             } catch (MalformedURLException e) {
-                Log.i("ОТЛАДКА","HttpCnnctAva :: RequestTask :: MalformedURLException =  " + e );
+                Log.i("ОТЛАДКА","HttpCnnctAva :: RequestTask :: ERROR :: линк криво составлен ");
             } catch (IOException e) {
                 Log.i("ОТЛАДКА","HttpCnnctAva :: RequestTask :: IOException =  " + e );
             } catch (Exception e) {
@@ -65,8 +65,8 @@ public class HttpCnnctAva {
 
             //try { Thread.sleep(5000); } catch (Exception ignored) { }
 
-            if (bitmap == null) Log.i("ОТЛАДКА","RequestTaskAva ::  ава не загружена" );
-            //else                Log.i("ОТЛАДКА","RequestTaskAva :: ава в потоке скачена " );
+            if (bitmap == null) Log.i("ОТЛАДКА","HttpCnnctAva :: RequestTaskAva ::  ава не загружена" );
+            else                Log.i("ОТЛАДКА","HttpCnnctAva :: RequestTaskAva :: ава в потоке скачена " );
             return bitmap;
         }
     }

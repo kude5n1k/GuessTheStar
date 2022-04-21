@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,19 +15,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.guessthestar.Model.HttpCnnctAva;
-import com.example.guessthestar.Presenter.Presenter;
+import com.example.guessthestar.Presenter.RandomClass;
 import com.example.guessthestar.Presenter.StarClass;
 import com.example.guessthestar.R;
 
 public class ListStarActivity extends AppCompatActivity {
-
     ImageView imageViewAvatar;
     ListView listView;
-    Presenter presenter;
-    ArrayAdapter<StarClass> adapterArrName;
-
-    HttpCnnctAva httpCnnctAva;
-    Bitmap bitmapAva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,31 +31,40 @@ public class ListStarActivity extends AppCompatActivity {
         imageViewAvatar = findViewById(R.id.imageViewAvatar);
         listView = findViewById(R.id.ListName);
 
-        //names
-        presenter = new Presenter();
-        adapterArrName = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, presenter.getRandomName());
-
-        // ava
-        httpCnnctAva = new HttpCnnctAva();
-
+        createTest();
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        bitmapAva = httpCnnctAva.downlodeAva("https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Humphrey_Bogart_1940.jpg/100px-Humphrey_Bogart_1940.jpg");
+    private void createTest(){
+        RandomClass randomClass = new RandomClass();
+
+        int randomStar = randomClass.getRandomStar();
+
+        // ava
+        String urlStrAva = "https://"+randomClass.getURLAvatar();
+        Bitmap bitmapAva = new HttpCnnctAva().downlodeAva(urlStrAva);
         imageViewAvatar.setImageBitmap(bitmapAva);
+
+        //names
+        ArrayAdapter<StarClass> adapterArrName = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, randomClass.getArrayListStarsRndm());
+
 
         listView.setAdapter(adapterArrName);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), "5555555555", LENGTH_LONG).show();
+                if (randomStar == i){
+                    Toast.makeText(getApplicationContext(), "you guessed fuking star", LENGTH_LONG).show();
+                    createTest();
+                } else {
+                    Toast.makeText(getApplicationContext(), "you not guessed star", LENGTH_LONG).show();
+                }
             }
         });
-
-
     }
+
+
+
+
 }
