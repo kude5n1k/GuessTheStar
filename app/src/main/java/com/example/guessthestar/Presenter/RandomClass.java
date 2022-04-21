@@ -1,13 +1,6 @@
 package com.example.guessthestar.Presenter;
 
-import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
-import static com.example.guessthestar.Model.DataClass.URL_STAR;
-import static com.example.guessthestar.Model.DataClass.getSizeArrayListStars;
-
-import android.util.Log;
-
-import com.example.guessthestar.Model.DataClass;
-import com.example.guessthestar.Model.HttpCnnct;
+import com.example.guessthestar.Model.DataStarClass;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,7 +12,7 @@ public class RandomClass {
 
     public RandomClass() {
         arrayListStarsRndm = new ArrayList<>();
-        int sizeArrayListStars = DataClass.getSizeArrayListStars();
+        int sizeArrayListStars = DataStarClass.getSizeArrayListStars();
 
         int ind1=0;
         int ind2=0;
@@ -30,9 +23,9 @@ public class RandomClass {
             ind3 = genRandom(0, sizeArrayListStars+1);
         }
 
-        arrayListStarsRndm.add(DataClass.getStar(ind1) );
-        arrayListStarsRndm.add(DataClass.getStar(ind2) );
-        arrayListStarsRndm.add(DataClass.getStar(ind3) );
+        arrayListStarsRndm.add(DataStarClass.getStar(ind1) );
+        arrayListStarsRndm.add(DataStarClass.getStar(ind2) );
+        arrayListStarsRndm.add(DataStarClass.getStar(ind3) );
 
         randomStar = genRandom(0,2);
     }

@@ -1,7 +1,7 @@
 package com.example.guessthestar.Model;
 
 
-import static com.example.guessthestar.Model.DataClass.getSizeArrayListStars;
+import static com.example.guessthestar.Model.DataStarClass.getSizeArrayListStars;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -81,7 +81,7 @@ public class HttpCnnct {
             if(name!=null && ava!=null){
                // Log.i("ОТЛАДКА","RequestTask :: findPatternLine ::  еть новая звезда " + name );
 
-                DataClass.setStar(new StarClass(ava, name));
+                DataStarClass.setStar(new StarClass(ava, name));
 
             }
         }

@@ -1,7 +1,7 @@
 package com.example.guessthestar.Presenter;
 
-import static com.example.guessthestar.Model.DataClass.URL_STAR;
-import static com.example.guessthestar.Model.DataClass.getSizeArrayListStars;
+import static com.example.guessthestar.Model.DataStarClass.URL_STAR;
+import static com.example.guessthestar.Model.DataStarClass.getSizeArrayListStars;
 
 import android.util.Log;
 
