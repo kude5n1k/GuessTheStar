@@ -14,7 +14,7 @@ public class StarClass {
 
 
 
-    public String getAvatar() {
+    public String getURLAvatar() {
         return avatar;
     }
 

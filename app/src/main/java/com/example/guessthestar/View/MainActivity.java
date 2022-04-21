@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.guessthestar.Presenter.Presenter;
+import com.example.guessthestar.Presenter.InitializationClass;
 import com.example.guessthestar.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i("ОТЛАДКА","MainActivity :: onCreate " );
 
-        new Presenter().initDate();
+        new InitializationClass();
 
 
     }
