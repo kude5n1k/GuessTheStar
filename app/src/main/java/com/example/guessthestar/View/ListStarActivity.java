@@ -1,20 +1,20 @@
 package com.example.guessthestar.View;
 
-import static android.widget.Toast.LENGTH_LONG;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.guessthestar.Model.HttpCnnctAva;
+import com.example.guessthestar.Model.DownloadAvaClass;
 import com.example.guessthestar.Presenter.RandomClass;
 import com.example.guessthestar.Presenter.StarClass;
 import com.example.guessthestar.R;
@@ -22,6 +22,7 @@ import com.example.guessthestar.R;
 public class ListStarActivity extends AppCompatActivity {
     ImageView imageViewAvatar;
     ListView listView;
+    ConstraintLayout ConstLayotActivityTes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class ListStarActivity extends AppCompatActivity {
 
         imageViewAvatar = findViewById(R.id.imageViewAvatar);
         listView = findViewById(R.id.ListName);
+        ConstLayotActivityTes = findViewById(R.id.constrainLayotActivityTestId);
 
         createTest();
     }
@@ -43,11 +45,11 @@ public class ListStarActivity extends AppCompatActivity {
 
         // ava
         String urlStrAva = "https://"+randomClass.getURLAvatar();
-        Bitmap bitmapAva = new HttpCnnctAva().downlodeAva(urlStrAva);
+        Bitmap bitmapAva = new DownloadAvaClass().downlodeAva(urlStrAva);
         imageViewAvatar.setImageBitmap(bitmapAva);
 
         //names
-        ArrayAdapter<StarClass> adapterArrName = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, randomClass.getArrayListStarsRndm());
+        ArrayAdapter<StarClass> adapterArrName = new ArrayAdapter<>(getApplicationContext(), R.layout.element_of_about, randomClass.getArrayListStarsRndm());
 
 
         listView.setAdapter(adapterArrName);
@@ -55,16 +57,30 @@ public class ListStarActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (randomStar == i){
-                    Toast.makeText(getApplicationContext(), "you guessed fuking star", LENGTH_LONG).show();
+                    setColor(10 ,Color.GREEN);
+                    setColor(300, Color.WHITE);
+                    //Toast.makeText(getApplicationContext(), "you guessed fuking star", Toast.LENGTH_SHORT).show();
                     createTest();
                 } else {
-                    Toast.makeText(getApplicationContext(), "you not guessed star", LENGTH_LONG).show();
+                    setColor(10, Color.RED);
+                    setColor(300, Color.WHITE);
+                    //Toast.makeText(getApplicationContext(), "you not guessed star", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
 
+
+
+    private void setColor(int time, int color){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ConstLayotActivityTes.setBackgroundColor(color);
+            }
+        }, time);
+    }
 
 
 }

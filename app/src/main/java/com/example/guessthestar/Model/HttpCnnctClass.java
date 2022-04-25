@@ -18,10 +18,10 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HttpCnnct {
+public class HttpCnnctClass {
 
 
-    public HttpCnnct(String URL) {
+    public HttpCnnctClass(String URL) {
                                                                                  //Log.i("ОТЛАДКА","HttpCnnct :: start " );
         RequestTask requestTask = new RequestTask();
         requestTask.execute(URL);
@@ -64,7 +64,7 @@ public class HttpCnnct {
 
 
             if (getSizeArrayListStars() < 1) Log.i("ОТЛАДКА","RequestTask :: findPatternLine ::  звезд не найдено" );
-            else  Log.i("ОТЛАДКА","HttpCnnct :: RequestTask :: stop :: звезды определены " );
+           // else  Log.i("ОТЛАДКА","HttpCnnct :: RequestTask :: stop :: звезды определены " );
 
             return null;
         }
@@ -76,35 +76,22 @@ public class HttpCnnct {
         Pattern pattern = Pattern.compile("<td><a href(.*?)</span></a>");
         Matcher matcher = pattern.matcher(line);
         while (matcher.find()){
-            String name = findPatternName(matcher.group(1));
-            String ava = findPatternAva(matcher.group(1));
+
+            String name = findPattern(matcher.group(1), "img alt=\"(.*?).jpg\"");
+            String ava = findPattern(matcher.group(1), "src=\"//(.*?)\" decoding");
+
             if(name!=null && ava!=null){
                // Log.i("ОТЛАДКА","RequestTask :: findPatternLine ::  еть новая звезда " + name );
-
                 DataStarClass.setStar(new StarClass(ava, name));
-
             }
         }
     }
 
-    // поиск имени в строке
-    private  String findPatternName(String line){
+    private String findPattern(String line, String patternStr){
         String resalt = null;
-        Pattern pattern = Pattern.compile("img alt=\"(.*?).jpg\"");
+        Pattern pattern = Pattern.compile(patternStr);
         Matcher matcher = pattern.matcher(line);
         if (matcher.find()){
-            //Log.i("ОТЛАДКА","pattern Name = " + matcher.group(1) );
-            resalt = matcher.group(1);
-        }
-        return resalt;
-    }
-    // поиск аватарки в строке
-    private  String findPatternAva(String line){
-        String resalt = null;
-        Pattern pattern = Pattern.compile("src=\"//(.*?)\" decoding");
-        Matcher matcher = pattern.matcher(line);
-        if (matcher.find()){
-            //Log.i("ОТЛАДКА","pattern Ava = " + matcher.group(1) );
             resalt = matcher.group(1);
         }
         return resalt;

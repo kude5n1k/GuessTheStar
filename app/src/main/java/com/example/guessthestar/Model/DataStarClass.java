@@ -11,6 +11,15 @@ public final class DataStarClass {
 
 
 
+    public static ArrayList<StarClass> getArrayListStars() {
+        return arrayListStars;
+    }
+
+    public static void setArrayListStars(ArrayList<StarClass> arrayListStars) {
+        DataStarClass.arrayListStars = arrayListStars;
+    }
+
+
 
 
     public static StarClass getStar(int index) {
@@ -18,11 +27,8 @@ public final class DataStarClass {
     }
 
 
-    public static void setArrayStars(ArrayList<StarClass> arrayListStars) {
-        DataStarClass.arrayListStars = arrayListStars;
-    }
     public static void setStar(StarClass Star) {
-        arrayListStars.add(Star);
+        if( (Star.getName() != null) && (Star.getURLAvatar() != null)  ) arrayListStars.add(Star);
     }
 
 
