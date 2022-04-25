@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class RandomClass {
     private final ArrayList<StarClass> arrayListStarsRndm;
-    private int randomStar; // star for check
+    private final int randomStar; // star for check
 
 
     public RandomClass() {
@@ -18,9 +18,9 @@ public class RandomClass {
         int ind2=0;
         int ind3=0;
         while ( ind1==ind2 || ind1==ind3 || ind2==ind3  ) {
-            ind1 = genRandom(0, sizeArrayListStars+1);
-            ind2 = genRandom(0, sizeArrayListStars+1);
-            ind3 = genRandom(0, sizeArrayListStars+1);
+            ind1 = genRandom(0, sizeArrayListStars-1);
+            ind2 = genRandom(0, sizeArrayListStars-1);
+            ind3 = genRandom(0, sizeArrayListStars-1);
         }
 
         arrayListStarsRndm.add(DataStarClass.getStar(ind1) );
@@ -45,6 +45,8 @@ public class RandomClass {
     public int getRandomStar() {
         return randomStar;
     }
+
+
 
     public int genRandom(int min, int max){
         int i = 0;

@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
-public class HttpCnnctAva {
+public class DownloadAvaClass {
 
     Bitmap bitmap;
 
@@ -66,7 +66,7 @@ public class HttpCnnctAva {
             //try { Thread.sleep(5000); } catch (Exception ignored) { }
 
             if (bitmap == null) Log.i("ОТЛАДКА","HttpCnnctAva :: RequestTaskAva ::  ава не загружена" );
-            else                Log.i("ОТЛАДКА","HttpCnnctAva :: RequestTaskAva :: ава в потоке скачена " );
+            //else                Log.i("ОТЛАДКА","HttpCnnctAva :: RequestTaskAva :: ава в потоке скачена " );
             return bitmap;
         }
     }
