@@ -8,8 +8,10 @@ public class StarClass {
     private String name;
 
     public StarClass(String avatar, String name) {
-        this.avatar = avatar;
-        this.name = name;
+        if (!avatar.isEmpty() && !name.isEmpty()) {
+            this.avatar = avatar;
+            this.name = name;
+        }
     }
 
 

@@ -7,14 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.guessthestar.Model.DownloadAvaClass;
+import com.example.guessthestar.Model.DownloadAva;
 import com.example.guessthestar.Presenter.RandomClass;
 import com.example.guessthestar.Presenter.StarClass;
 import com.example.guessthestar.R;
@@ -41,26 +40,35 @@ public class ListStarActivity extends AppCompatActivity {
     private void createTest(){
         RandomClass randomClass = new RandomClass();
 
-        int randomStar = randomClass.getRandomStar();
+        int randomStar = randomClass.getNumberRightStar();
 
         // ava
         String urlStrAva = "https://"+randomClass.getURLAvatar();
-        Bitmap bitmapAva = new DownloadAvaClass().downlodeAva(urlStrAva);
-        imageViewAvatar.setImageBitmap(bitmapAva);
+        Bitmap bitmapAva = new DownloadAva().downlodeAva(urlStrAva);
+        if(bitmapAva!=null) imageViewAvatar.setImageBitmap(bitmapAva);
 
-        //names
-        ArrayAdapter<StarClass> adapterArrName = new ArrayAdapter<>(getApplicationContext(), R.layout.element_of_about, randomClass.getArrayListStarsRndm());
+        // names
+        ArrayAdapter<StarClass> adapterArrName = new ArrayAdapter<>(getApplicationContext(), R.layout.element_of_about, randomClass.getArrayListStarsRandom());
 
 
+        // show names + waiting answer
         listView.setAdapter(adapterArrName);
+        listView.setEnabled(true);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (randomStar == i){
+                    listView.setEnabled(false);
                     setColor(10 ,Color.GREEN);
                     setColor(300, Color.WHITE);
                     //Toast.makeText(getApplicationContext(), "you guessed fuking star", Toast.LENGTH_SHORT).show();
-                    createTest();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            createTest();
+                        }
+                    },1000);
+
                 } else {
                     setColor(10, Color.RED);
                     setColor(300, Color.WHITE);

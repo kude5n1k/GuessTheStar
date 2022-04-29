@@ -2,6 +2,7 @@
     <string name="app_name">GuessTheStar</string>
     <string name="guess_the_star">Guess The Star</string>
     <string name="start">Start</string>
+    <string name="we_have_error">we have ERROR</string>
 
 
     <string-array name="name">
