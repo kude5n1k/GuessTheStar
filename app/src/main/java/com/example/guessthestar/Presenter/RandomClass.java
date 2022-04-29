@@ -1,49 +1,55 @@
 package com.example.guessthestar.Presenter;
 
-import com.example.guessthestar.Model.DataStarClass;
+import static com.example.guessthestar.Model.DataStarClass.getSizeArrayListStars;
+import static com.example.guessthestar.Model.DataStarClass.getStar;
+
 
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/** get 3 random stars from arrayListStars  and  choose 1 for right variant*/
 public class RandomClass {
-    private final ArrayList<StarClass> arrayListStarsRndm;
-    private final int randomStar; // star for check
+    private final ArrayList<StarClass> arrayListStarsRandom;
+    private final int numberRightStar; // star for check from 3 random stars
 
 
     public RandomClass() {
-        arrayListStarsRndm = new ArrayList<>();
-        int sizeArrayListStars = DataStarClass.getSizeArrayListStars();
+        arrayListStarsRandom = new ArrayList<>();
+        int countStars = getSizeArrayListStars(); // all star
 
-        int ind1=0;
-        int ind2=0;
-        int ind3=0;
-        while ( ind1==ind2 || ind1==ind3 || ind2==ind3  ) {
-            ind1 = genRandom(0, sizeArrayListStars-1);
-            ind2 = genRandom(0, sizeArrayListStars-1);
-            ind3 = genRandom(0, sizeArrayListStars-1);
+        int star1=0;
+        int star2=0;
+        int star3=0;
+        while ( star1 == star2  ) {
+            star1 = genRandom(0, countStars-1);
+            star2 = genRandom(0, countStars-1);
+        }
+        while ( star1 == star3 || star2 == star3  ) {
+            star3 = genRandom(0, countStars-1);
         }
 
-        arrayListStarsRndm.add(DataStarClass.getStar(ind1) );
-        arrayListStarsRndm.add(DataStarClass.getStar(ind2) );
-        arrayListStarsRndm.add(DataStarClass.getStar(ind3) );
+        arrayListStarsRandom.add(getStar(star1) );
+        arrayListStarsRandom.add(getStar(star2) );
+        arrayListStarsRandom.add(getStar(star3) );
 
-        randomStar = genRandom(0,2);
+        numberRightStar = genRandom(0, arrayListStarsRandom.size()-1);
     }
 
 
 
-    public ArrayList<StarClass> getArrayListStarsRndm(){
-        return arrayListStarsRndm;
+    public ArrayList<StarClass> getArrayListStarsRandom(){
+        return arrayListStarsRandom;
     }
     public String getURLAvatar(){
-        return arrayListStarsRndm.get(randomStar).getURLAvatar();
+        return arrayListStarsRandom.get(numberRightStar).getURLAvatar();
     }
     public String getName(){
-        return arrayListStarsRndm.get(randomStar).getName();
+        return arrayListStarsRandom.get(numberRightStar).getName();
     }
 
-    public int getRandomStar() {
-        return randomStar;
+    public int getNumberRightStar() {
+        return numberRightStar;
     }
 
 
