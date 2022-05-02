@@ -11,16 +11,6 @@ public final class DataStarClass {
 
 
 
-    public static ArrayList<StarClass> getArrayListStars() {
-        return arrayListStars;
-    }
-
-    public static void setArrayListStars(ArrayList<StarClass> arrayListStars) {
-        DataStarClass.arrayListStars = arrayListStars;
-    }
-
-
-
 
     public static StarClass getStar(int index) {
         return arrayListStars.get(index);

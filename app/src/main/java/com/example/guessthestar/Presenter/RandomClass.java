@@ -10,11 +10,12 @@ import java.util.Random;
 
 /** get 3 random stars from arrayListStars  and  choose 1 for right variant*/
 public class RandomClass {
-    private final ArrayList<StarClass> arrayListStarsRandom;
-    private final int numberRightStar; // star for check from 3 random stars
+    private ArrayList<StarClass> arrayListStarsRandom;
+    private int numberRightStar; // star for check from 3 random stars
 
+    public RandomClass() { }
 
-    public RandomClass() {
+    public void initialization(){
         arrayListStarsRandom = new ArrayList<>();
         int countStars = getSizeArrayListStars(); // all star
 
@@ -37,7 +38,6 @@ public class RandomClass {
     }
 
 
-
     public ArrayList<StarClass> getArrayListStarsRandom(){
         return arrayListStarsRandom;
     }
@@ -54,6 +54,7 @@ public class RandomClass {
 
 
 
+    // random int, min and max inclusive
     public int genRandom(int min, int max){
         int i = 0;
         int diff = max - min;

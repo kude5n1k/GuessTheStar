@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 buttonStart.setEnabled(true);
             }
         } catch (Exception e) {
+            textView.setText(R.string.we_have_error);
             Log.i("MyDEBUG", "MainActivity :: ERROR :: e =" + e);
         }
     }

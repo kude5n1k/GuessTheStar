@@ -39,7 +39,7 @@ public class ListStarActivity extends AppCompatActivity {
 
     private void createTest(){
         RandomClass randomClass = new RandomClass();
-
+        randomClass.initialization();
         int randomStar = randomClass.getNumberRightStar();
 
         // ava
@@ -59,19 +59,19 @@ public class ListStarActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (randomStar == i){
                     listView.setEnabled(false);
-                    setColor(10 ,Color.GREEN);
-                    setColor(300, Color.WHITE);
+                    setColor(10 , Color.GREEN);
+                    setColor(300, 0);
                     //Toast.makeText(getApplicationContext(), "you guessed fuking star", Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             createTest();
                         }
-                    },1000);
+                    },600);
 
                 } else {
                     setColor(10, Color.RED);
-                    setColor(300, Color.WHITE);
+                    setColor(300, 0);
                     //Toast.makeText(getApplicationContext(), "you not guessed star", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -79,13 +79,15 @@ public class ListStarActivity extends AppCompatActivity {
     }
 
 
-
-
     private void setColor(int time, int color){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ConstLayotActivityTes.setBackgroundColor(color);
+                if(color==0){
+                    ConstLayotActivityTes.setBackgroundResource(R.drawable.back_stars);
+                }else {
+                    ConstLayotActivityTes.setBackgroundColor(color);
+                }
             }
         }, time);
     }
