@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">GuessTheStar</string>
     <string name="guess_the_star">Guess The Star</string>
-    <string name="start">Start</string>
+    <string name="start_test">Start Test</string>
     <string name="we_have_error">we have ERROR</string>
+    <string name="stars_0">Stars 0</string>
     <string name="downloaded">downloaded...</string>
+    <string name="download_Stars">Download Stars</string>
+    <string name="check_stars">Check Stars</string>
+    <string name="clear_stars">clear stars</string>
 
 
     <string-array name="name">

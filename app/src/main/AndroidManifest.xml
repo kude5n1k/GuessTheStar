@@ -11,12 +11,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GuessTheStar">
+        android:theme="@style/Theme.GuessTheStar"
+        android:name=".App">
         <activity
-            android:name=".View.ListStarActivity"
+            android:name=".ui.body_test.view.BodyTestActivity"
             android:exported="false" />
         <activity
-            android:name=".View.MainActivity"
+            android:name=".ui.preview.PreviewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
