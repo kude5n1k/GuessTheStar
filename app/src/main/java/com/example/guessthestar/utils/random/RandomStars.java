@@ -5,7 +5,6 @@ import static com.example.guessthestar.model.date.db.DataStarClass.getStar;
 
 
 import com.example.guessthestar.date.stars.StarClass;
-import com.example.guessthestar.utils.random.GenerateRandom;
 
 import java.util.ArrayList;
 
@@ -72,7 +71,7 @@ public class RandomStars {
         return arrayListStarsRandom;
     }
     public String getURLAvatarRightStar(){
-        return arrayListStarsRandom.get(numberRightStar).getURLAvatar();
+        return arrayListStarsRandom.get(numberRightStar).getAvatar();
     }
     public String getNameRightStar(){
         return arrayListStarsRandom.get(numberRightStar).getName();

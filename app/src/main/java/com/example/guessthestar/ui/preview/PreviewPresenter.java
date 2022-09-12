@@ -1,37 +1,51 @@
 package com.example.guessthestar.ui.preview;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.example.guessthestar.date.stars.source.StarsDataSource;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+
 import com.example.guessthestar.date.stars.source.StarsRepository;
 import com.example.guessthestar.ui.base.BasePresenter;
 import com.example.guessthestar.utils.StartBodyTest;
 
-import java.lang.ref.WeakReference;
 
-
-public class PreviewPresenter extends BasePresenter<PreviewView> {
+public class PreviewPresenter extends BasePresenter<PreviewView>  implements PreviewPresenterCallback {
 
     private final StarsRepository starsRepository;
+    LiveData<Integer> countStarsLiveData;
+    Observer<Integer> countStarsObserver;
 
     PreviewPresenter(PreviewView previewView, StarsRepository starsRepository) {
         super(previewView);
         this.starsRepository = starsRepository;
+
+
+        countStarsLiveData = starsRepository.getCountStars();
+        countStarsObserver = new Observer<Integer>(){
+            @Override
+            public void onChanged(@Nullable Integer count) {
+                //view.sendMessage("!-Live date-! "+count);
+                Log.i("MyDEBUG","PreviewPresenter :: LiveDate :: start : count="+count );
+                resultCountStars(count);
+            }
+        };
+
+    }
+
+    public void startObserverLD(LifecycleOwner owner){
+        countStarsLiveData.observe(owner, countStarsObserver);
+    }
+    public void stopObserverLD(){
+        countStarsLiveData.removeObserver(countStarsObserver);
     }
 
 
-    /**Callback*/
-    public interface Callback {
-        void sendMessage(String mess);
-    }
 
-
-
-
-    /** Activity ===> Presenter */
-    //checking if stars have
-    public void checkCountStars(){
-        int countStars = starsRepository.getCountStars();
+    public void resultCountStars(int countStars) {
         if (countStars <= 1)  {
             // not Ready To Start
             view.sendMessage("need downloaded stars");
@@ -46,24 +60,25 @@ public class PreviewPresenter extends BasePresenter<PreviewView> {
         }
     }
 
+
+
+
     public void downloadedStars() {
-        //starsRepository.getStarsFromRemoteDataSource(new StarsDownloadCallListener(view));
-        starsRepository.getStarsFromRemoteDataSource(new Callback(){
-            @Override
-            public void sendMessage(String mes) {
-                view.sendMessage(mes);
-            }
-        });
+        starsRepository.getStarsFromRemoteDataSource();
     }
 
     public void clearStars(){
-        starsRepository.clearStars(new Callback(){
-            @Override
-            public void sendMessage(String mes) {
-                view.sendMessage(mes);
-            }
-        });
+        starsRepository.deleteStars();
     }
+
+    @Override
+    public void sendMessage(String mess){
+        view.sendMessage(mess);
+    };
+
+
+
+
 
     public void startBodyTestActivity(Context cnt) {
         new StartBodyTest(cnt);
@@ -74,45 +89,7 @@ public class PreviewPresenter extends BasePresenter<PreviewView> {
 
 
 
-    /** Activity <=== Presenter*/
-    public void progressUpdate(int progress) {
-        view.progressUpdate(progress);
-    }
-    public void downloadComplete(int countStars) {
-       // view.readyToStart(countStars);
-    }
-    public void downloadError() {
-        view.sendMessage("  ");
-    }
 
-    /**
-     * Callback
-     **/
-    private static class StarsDownloadCallListener implements StarsDataSource.LoadStarsCallback {
-        private WeakReference<PreviewView> view;   // мягкая ссылка подходит для метаданных
-
-        private StarsDownloadCallListener(PreviewView view) {
-            this.view = new WeakReference<>(view);
-        }
-
-        @Override
-        public void onProgressUpdate(int progress){
-            if (view.get() == null) return;
-            view.get().progressUpdate(progress);
-        }
-
-        @Override
-        public void onDownloadComplete(int countStars){
-            if (view.get() == null) return;
-           // view.get().readyToStart(countStars);
-        }
-
-        @Override
-        public void sendMessage(String mes){
-            if (view.get() == null) return;
-            view.get().sendMessage(mes);
-        }
-    }
 
 
 

@@ -2,10 +2,32 @@ package com.example.guessthestar.date.stars;
 
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+
+@Entity(tableName = "stars")
 public class StarClass {
+
+    @PrimaryKey(autoGenerate = true)  // назначить какое-либо поле ключом
+    @ColumnInfo(name = "id")
+    private int id;
+
+    @Expose       // true, поле, отмеченное этой аннотацией, записывается в JSON при сериализации.
+    @SerializedName("avatar")      // имя поля при его сериализации или десериализации
+    @ColumnInfo(name = "avatar")   // указать именя поля в таблице
     private String avatar;
+
+
+    @Expose
+    @SerializedName("name")
+    @ColumnInfo(name = "name")
     private String name;
+
 
     public StarClass(String name, String avatar) {
 
@@ -29,7 +51,16 @@ public class StarClass {
         return false;
     }
 
-    public String getURLAvatar() {
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAvatar() {
         return avatar;
     }
 

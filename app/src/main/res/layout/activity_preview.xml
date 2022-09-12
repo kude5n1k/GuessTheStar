@@ -53,17 +53,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineA1" />
 
-    <Button
-        android:id="@+id/buttonCheckStars"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:onClick="checkStars"
-        android:text="@string/check_stars"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar_download" />
 
     <Button
         android:id="@+id/buttonDownloadStars"
@@ -74,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCheckStars" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar_download" />
 
     <Button
         android:id="@+id/buttonClearStars"

@@ -8,20 +8,21 @@ import androidx.annotation.NonNull;
 public class App extends Application {
 
 
+    private static App sInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        init(this);
     }
 
-
-
-    public void test_metod (){
-
+    private static void init(App app) {
+        sInstance = app;
     }
 
-
+    public static App getInstance() {
+        return sInstance;
+    }
 
 
 

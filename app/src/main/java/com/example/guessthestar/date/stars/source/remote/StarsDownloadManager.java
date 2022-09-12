@@ -33,7 +33,7 @@ public class StarsDownloadManager {
 
 
 
-    public void downloadedStars(final StarsRepository.Callback callback) {
+    public void downloadedStars(final StarsRepository.DownloadStarCallback downloadStarCallback) {
        // StarsDownloadInfoRequest.getsInstance().request();
 
         //StarsServiceRequest.getsInstance().requestImages();
@@ -47,11 +47,11 @@ public class StarsDownloadManager {
         parseURL.startRequest(new StDlMngCallback(){
             @Override
             public void downloadComplete(ArrayList<StarClass> arrStarClass) {
-                callback.downloadComplete(arrStarClass);
+                downloadStarCallback.downloadComplete(arrStarClass);
             }
             @Override
             public void downloadError(String mess) {
-                callback.downloadError(mess);
+                downloadStarCallback.downloadError(mess);
             }
         });
 
