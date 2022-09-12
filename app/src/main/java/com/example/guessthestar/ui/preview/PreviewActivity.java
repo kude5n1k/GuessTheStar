@@ -77,7 +77,7 @@ public class PreviewActivity extends BaseActivity<PreviewPresenter> implements P
     }
 
     public void startBodyTestActivity(View view) {
-        //previewPresenter.startBodyTestActivity(this);
+        presenter.startBodyTestActivity(this);
     }
 
 

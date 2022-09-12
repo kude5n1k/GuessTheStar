@@ -1,5 +1,6 @@
-package com.example.guessthestar.ui.body_test.view;
+package com.example.guessthestar.ui.body_test;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -13,18 +14,33 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.guessthestar.date.DataManager;
 import com.example.guessthestar.date.stars.StarClass;
 import com.example.guessthestar.R;
+import com.example.guessthestar.date.stars.source.StarsRepository;
+import com.example.guessthestar.ui.base.BaseActivity;
 import com.example.guessthestar.ui.body_test.presenter.BodyTestActivityPresenter;
 import com.example.guessthestar.ui.body_test.presenter.BodyTestActivityPresenterImpl;
+import com.example.guessthestar.ui.preview.PreviewPresenter;
+import com.example.guessthestar.ui.preview.PreviewView;
 
 import java.util.ArrayList;
 
-public class BodyTestActivity extends AppCompatActivity implements BodyTestActivityView {
+public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements BodyTestView {
+
     private BodyTestActivityPresenter bodyTestActivityPresenter;
     ImageView imageViewAvatar;
     ListView listView;
     ConstraintLayout ConstLayotActivityTes;
+
+
+    @NonNull
+    @Override
+    protected BodyTestPresenter createPresenter() {
+        StarsRepository starsRepository = DataManager.getsInstance().getStarsRepository();
+        return new BodyTestPresenter(this, starsRepository);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +51,11 @@ public class BodyTestActivity extends AppCompatActivity implements BodyTestActiv
         listView = findViewById(R.id.ListName);
         ConstLayotActivityTes = findViewById(R.id.constrainLayotActivityTestId);
 
-        bodyTestActivityPresenter = new BodyTestActivityPresenterImpl(this);
-        bodyTestActivityPresenter.createNewTest();
-
+        //bodyTestActivityPresenter = new BodyTestActivityPresenterImpl(this);
+        //bodyTestActivityPresenter.createNewTest();
+        presenter.createNewTest();
     }
+
 
 
     @Override

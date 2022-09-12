@@ -1,6 +1,7 @@
 package com.example.guessthestar.ui.preview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -10,7 +11,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.guessthestar.date.stars.source.StarsRepository;
 import com.example.guessthestar.ui.base.BasePresenter;
-import com.example.guessthestar.utils.StartBodyTest;
+import com.example.guessthestar.ui.body_test.BodyTestActivity;
 
 
 public class PreviewPresenter extends BasePresenter<PreviewView>  implements PreviewPresenterCallback {
@@ -81,7 +82,8 @@ public class PreviewPresenter extends BasePresenter<PreviewView>  implements Pre
 
 
     public void startBodyTestActivity(Context cnt) {
-        new StartBodyTest(cnt);
+        Intent intent = new Intent(cnt, BodyTestActivity.class);
+        cnt.startActivity(intent);
     }
 
 

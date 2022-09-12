@@ -14,7 +14,7 @@
         android:theme="@style/Theme.GuessTheStar"
         android:name=".App">
         <activity
-            android:name=".ui.body_test.view.BodyTestActivity"
+            android:name=".ui.body_test.BodyTestActivity"
             android:exported="false" />
         <activity
             android:name=".ui.preview.PreviewActivity"
