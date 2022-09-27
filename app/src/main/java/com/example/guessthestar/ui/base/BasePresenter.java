@@ -1,7 +1,6 @@
 package com.example.guessthestar.ui.base;
 
 
-
 public abstract class BasePresenter <View extends BaseView> {
 
     protected View view;

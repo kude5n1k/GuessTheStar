@@ -56,6 +56,12 @@ public class ParseURL {
         protected Void doInBackground(String... strings) {
 
             try {
+/*
+                jsoup-библиотека предназначена для разбора HTML-страниц (парсинг),
+                позволяя извлечь необходимые данные, используя DOM, CSS и методы в стиле jQuery.
+                Библиотека поддерживает спецификации HTML5 и позволяет парсить страницы,
+                как это делают современные браузеры.
+*/
                 Document doc = Jsoup.connect(strings[0]).get();
 
                 // поиск строк для объекта StarClass

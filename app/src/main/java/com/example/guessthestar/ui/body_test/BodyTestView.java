@@ -1,18 +1,21 @@
 package com.example.guessthestar.ui.body_test;
 
-import android.graphics.Bitmap;
+import android.content.Context;
+import android.widget.ImageView;
 
-import com.example.guessthestar.date.stars.StarClass;
 import com.example.guessthestar.ui.base.BaseView;
 
 import java.util.ArrayList;
 
 public interface BodyTestView extends BaseView {
 
-    void setAva(Bitmap bitmapAva);
-    void setNames(ArrayList<StarClass> arrayListStarsRandom);
+    Context getContextOwner();
 
-    void answerCorrect();
-    void answerNotCorrect();
+    ImageView getImageViewAva();
+    void setNames(ArrayList<String> arrayListStarsRandom);
+
+    void setStatusListName(boolean status);
+
+    void toastError(String mess);
 
 }

@@ -1,4 +1,4 @@
-package com.example.guessthestar.model;
+package com.example.guessthestar.date.stars;
 
 import static org.junit.Assert.assertEquals;
 

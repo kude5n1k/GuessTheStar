@@ -4,10 +4,15 @@
     <string name="start_test">Start Test</string>
     <string name="we_have_error">we have ERROR</string>
     <string name="stars_0">Stars 0</string>
-    <string name="downloaded">downloaded...</string>
+    <string name="downloaded">downloaded…</string>
     <string name="download_Stars">Download Stars</string>
     <string name="check_stars">Check Stars</string>
     <string name="clear_stars">clear stars</string>
+
+
+    <string name="ERROR_check_variant">Ошибка проверки ответа</string>
+    <string name="ERROR_uploading_avatar">Ошибка загрузки аватарки</string>
+    <string name="ERROR_uploading_list_names">Ошибка загрузки новых имен</string>
 
 
     <string-array name="name">

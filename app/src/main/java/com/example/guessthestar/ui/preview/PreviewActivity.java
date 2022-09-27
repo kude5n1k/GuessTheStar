@@ -16,6 +16,7 @@ import com.example.guessthestar.R;
 import com.example.guessthestar.date.DataManager;
 import com.example.guessthestar.date.stars.source.StarsRepository;
 import com.example.guessthestar.ui.base.BaseActivity;
+import com.facebook.stetho.Stetho;
 
 
 /**
@@ -43,7 +44,7 @@ public class PreviewActivity extends BaseActivity<PreviewPresenter> implements P
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview);
 
-        Log.i("MyDEBUG","MainActivity :: onCreate :: start " );
+        //Log.i("MyDEBUG","MainActivity :: onCreate :: start " );
         textView = findViewById(R.id.textView_status);
         progressBar = findViewById(R.id.progressBar_download);
         progressBar.setMax(40);
@@ -67,7 +68,7 @@ public class PreviewActivity extends BaseActivity<PreviewPresenter> implements P
 
 
 
-    /** buttons (Activity ===> Presenter)  */
+    /** Buttons (Activity ===> Presenter)  */
     public void downloadStars(View view) {
         presenter.downloadedStars(); // скачиваем данные по звездам
     }

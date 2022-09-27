@@ -2,8 +2,8 @@ package com.example.guessthestar.date;
 
 import com.example.guessthestar.date.stars.source.StarsRepository;
 import com.example.guessthestar.date.stars.source.local.db.StarsDao;
-import com.example.guessthestar.date.stars.source.local.db.StarsDatabase;
-import com.example.guessthestar.date.stars.source.local.db.StarsDbDataSource;
+import com.example.guessthestar.date.stars.source.local.db.StarsDataBase;
+import com.example.guessthestar.date.stars.source.local.StarsDbDataSource;
 import com.example.guessthestar.date.stars.source.remote.StarsDownloadManager;
 
 public class DataManager {
@@ -27,7 +27,7 @@ public class DataManager {
 
 
 
-        StarsDao starsDao = StarsDatabase.getInstance().starsDao();
+        StarsDao starsDao = StarsDataBase.getInstance().starsDao();
         StarsDbDataSource starsDbDataSource = StarsDbDataSource.getsInstance(starsDao);
 
         return StarsRepository.getsInstance(starsDownloadManager, starsDbDataSource);

@@ -32,7 +32,7 @@ public class FindTag {
             String name = elements.attr("title");
 
             if (text.equals(name) && text.length()>1 ) {
-                printlog("ParseURLAsyncTask", " \n srcset = " + text);
+               // printlog("findName", " \n srcset = " + text);
                 arrValidName.add(text);
             }
         }
@@ -48,12 +48,11 @@ public class FindTag {
         for (Element elementsArr2x : elements2x) {
             String altName = elementsArr2x.attr("alt");
             String _srcset = elementsArr2x.attr("srcset");
-            //String srcset = findPattern(_srcset, ".jpg 1.5x, //(.+?).jpg");    // "img alt=\"(.*?).jpg\""   // <img alt="Humphrey Bogart 1940.jpg" src=
 
-            String __srcset = _srcset.replace("//(.+)//", "");
+            String __srcset = _srcset.replaceAll (".+//", "");
             String srcset = __srcset.replace(" 2x", "");
 
-            printlog("ParseURLAsyncTask",  altName + " \n srcset = " + srcset);
+            //printlog("findAltNameAndLink",  altName + " \n srcset = " + srcset);
             arrAltNameLink.put(altName, srcset);
         }
         if (arrAltNameLink.size()<1) throw new IllegalArgumentException("link not found");
@@ -73,7 +72,7 @@ public class FindTag {
 
 
     private void printlog(String teg, String log){
-        //Log.i("MyDEBUG","FindTag :: "+teg+" :: rezalt = \n" + log + "\n ---------------------------------");
+        Log.i("MyDEBUG","FindTag :: "+teg+" :: rezalt = \n" + log + "\n ---------------------------------");
     }
 
 }

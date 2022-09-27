@@ -1,61 +1,149 @@
 package com.example.guessthestar.ui.body_test;
 
-import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Handler;
+import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.example.guessthestar.R;
 import com.example.guessthestar.date.stars.source.StarsRepository;
-import com.example.guessthestar.date.stars.source.remote.starsDownloadAvaImg.web.DownloadAva;
-import com.example.guessthestar.date.stars.source.remote.starsDownloadAvaImg.web.DownloadAvaImpl;
 import com.example.guessthestar.ui.base.BasePresenter;
-import com.example.guessthestar.utils.random.RandomStars;
+import com.example.guessthestar.utils.GenerateRandom;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class BodyTestPresenter extends BasePresenter<BodyTestView> {
 
     private final StarsRepository starsRepository;
-    private DownloadAvaImpl downloadAvaImpl;
-    private int randomStar;
+    private int countAllStars;
+    private int rightStarKey; // right answer
 
     protected BodyTestPresenter(BodyTestView bodyTestView, StarsRepository starsRepository) {
         super(bodyTestView);
         this.starsRepository = starsRepository;
+        countAllStars = starsRepository.getCountStars(); // all star
     }
 
 
     /** Activity ===> Presenter */
     public void createNewTest() {
+        /*
+         get 3 random number from all list stars :: x[1...49] : x{5,12,45}
+         get random right name from x[] :: y={key,line} :: y={0,5}
+        */
 
-        RandomStars randomStars = new RandomStars();
-        randomStars.initialization();
-        randomStar = randomStars.getNumberRightStar();
+        GenerateRandom generateRandom = new GenerateRandom();
+        // три рандом звезды от 1 до 49
+        int[] arrStarsLines = generateRandom.getLinesArrStarsVariants(countAllStars); // варианты звезд
 
-        // ava
-        String urlStrAva = "https://"+ randomStars.getURLAvatarRightStar();
-        //downloadAvaImpl = new DownloadAva(this);
-        //downloadAvaImpl.startDownloadAva(urlStrAva);
+        // правильный ответ key [0,1,2] и его значение [1-49]
+        HashMap<Integer, Integer> keyAndLink = generateRandom.getLineRightStar(arrStarsLines);
+         rightStarKey=-1; // правильная звезда key
+        int rightStarLine=-1; // правильная звезда line
+        for(Map.Entry<Integer, Integer> entry : keyAndLink.entrySet()) {
+            rightStarKey = entry.getKey();
+            rightStarLine = entry.getValue();
+        }
+
+/*
+        Log.i("MyDEBUG","BodyTestPresenter :: " +
+                "\ncountAllStars = " + countAllStars+
+                "\narrStarsLines = " + arrStarsLines[0] + " " + arrStarsLines[1] + " " +arrStarsLines[2] +
+                "\nrightStarKey = " + rightStarKey + " rightStarLine = " + rightStarLine
+        );
+*/
+
+        // ava for nuw test
+        setAva(rightStarLine);
+
+        // variant name for nuw test
+        setNames(arrStarsLines);
+    }
 
 
-        /**  Activity ===>  Presenter  ===>  Activity */
-        // name
-        view.setNames(randomStars.getArrayListStarsRandom());
+    // download and set AVA for nuw test
+    public void setAva(int rightStarLine){
+        try {
+            Glide
+                    .with(view.getContextOwner())
+                    .load("https://"+starsRepository.getAddressAva(rightStarLine))
+                    .into(view.getImageViewAva());
+        }catch (Exception ignored){
+            view.toastError("ERROR\n"+R.string.ERROR_uploading_avatar);
+        }
+    }
+
+
+    // list NAMEs for nuw test
+    public void setNames(int[] arrStarsLines){
+        try {
+            ArrayList<String> nameStarsVariants = starsRepository.getNameStarsVariants(arrStarsLines);
+            view.setNames(nameStarsVariants);
+        }catch (Exception ignored){
+            view.toastError("ERROR\n"+R.string.ERROR_uploading_list_names);
+        }
 
     }
 
 
 
-    /** Activity  <=== Presenter */
-    public void setAva(Bitmap bitmapAva) {
-        view.setAva(bitmapAva);
-    }
+
 
 
     /**  Activity ===>  Presenter  ===>  Activity */
-    public void checkAnswer(int i) {
-        if (randomStar == i){
-            view.answerCorrect();
-        } else {
-            view.answerNotCorrect();
+    public void checkAnswer(View viewVariant, int position) {
+        try {
+            if (rightStarKey == position) {
+                answerCorrect(viewVariant);
+            } else {
+                answerNotCorrect(viewVariant);
+            }
+        }catch (Exception ignored){
+            view.toastError("ERROR\n"+R.string.ERROR_check_variant);
         }
     }
+
+
+    public void answerCorrect(View viewVariant) {
+        view.setStatusListName(false);
+        setColor(10 , viewVariant, Color.GREEN);
+        //setColor(300, viewVariant, 0);
+        //Toast.makeText(getApplicationContext(), "you guessed fuking star", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                createNewTest();
+            }
+        },800);
+    }
+
+
+    private void answerNotCorrect(View viewVariant) {
+        setColor(10, viewVariant, Color.RED);
+        setColor(300, viewVariant, 0);
+        //Toast.makeText(getApplicationContext(), "you not guessed star", Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void setColor(int time, View viewVariant, int color){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(color==0){
+                    viewVariant.setBackgroundColor(R.drawable.back_stars);
+                }else {
+                    viewVariant.setBackgroundColor(color);
+                }
+            }
+        }, time);
+    }
+
+
+
+
 
 
 

@@ -9,16 +9,16 @@ import com.example.guessthestar.date.stars.StarClass;
 
 
 @Database(entities = {StarClass.class}, version = 1, exportSchema = false)
-public abstract class StarsDatabase extends RoomDatabase {
+public abstract class StarsDataBase extends RoomDatabase {
 
     public abstract StarsDao starsDao();
 
-    private static StarsDatabase sInstance;
+    private static StarsDataBase sInstance;
 
-    public static StarsDatabase getInstance(){
+    public static StarsDataBase getInstance(){
         if(sInstance == null){
             // Создание объекта базы данных в классе StarsDatabase.class
-            sInstance = Room.databaseBuilder(App.getInstance(), StarsDatabase.class, "Stars.db").build();
+            sInstance = Room.databaseBuilder(App.getInstance(), StarsDataBase.class, "Stars.db").build();
         }
         return sInstance;
     }

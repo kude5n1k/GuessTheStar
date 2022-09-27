@@ -9,9 +9,12 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import com.example.guessthestar.date.stars.StarClass;
 import com.example.guessthestar.date.stars.source.StarsRepository;
 import com.example.guessthestar.ui.base.BasePresenter;
 import com.example.guessthestar.ui.body_test.BodyTestActivity;
+
+import java.util.ArrayList;
 
 
 public class PreviewPresenter extends BasePresenter<PreviewView>  implements PreviewPresenterCallback {
@@ -25,7 +28,7 @@ public class PreviewPresenter extends BasePresenter<PreviewView>  implements Pre
         this.starsRepository = starsRepository;
 
 
-        countStarsLiveData = starsRepository.getCountStars();
+        countStarsLiveData = starsRepository.getCountStarsLD();
         countStarsObserver = new Observer<Integer>(){
             @Override
             public void onChanged(@Nullable Integer count) {
@@ -63,10 +66,20 @@ public class PreviewPresenter extends BasePresenter<PreviewView>  implements Pre
 
 
 
-
-    public void downloadedStars() {
-        starsRepository.getStarsFromRemoteDataSource();
+    /**Callback*/
+    public interface PreviewPresenterCallback {
+        void downloadError(String mess);
     }
+    public void downloadedStars() {
+        starsRepository.getStarsFromRemoteDataSource(new PreviewPresenterCallback(){
+            @Override
+            public void downloadError(String mess) {
+                sendMessage(mess);
+            }
+        });
+    }
+
+
 
     public void clearStars(){
         starsRepository.deleteStars();
