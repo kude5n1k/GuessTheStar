@@ -1,6 +1,5 @@
 package com.example.guessthestar.date.stars.source.remote.downloadInfoText.jsoup.utils;
 
-import android.util.Log;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,8 +7,6 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class FindTag {
 
@@ -32,7 +29,6 @@ public class FindTag {
             String name = elements.attr("title");
 
             if (text.equals(name) && text.length()>1 ) {
-               // printlog("findName", " \n srcset = " + text);
                 arrValidName.add(text);
             }
         }
@@ -52,7 +48,7 @@ public class FindTag {
             String __srcset = _srcset.replaceAll (".+//", "");
             String srcset = __srcset.replace(" 2x", "");
 
-            //printlog("findAltNameAndLink",  altName + " \n srcset = " + srcset);
+
             arrAltNameLink.put(altName, srcset);
         }
         if (arrAltNameLink.size()<1) throw new IllegalArgumentException("link not found");
@@ -60,19 +56,7 @@ public class FindTag {
     }
 
 
-    private String findPattern(String line, String patternStr){
-        Pattern pattern = Pattern.compile(patternStr);
-        Matcher matcher = pattern.matcher(line);
-        if (matcher.find()){
-            return matcher.group(1);
-        }
-        return null;
-    }
 
 
-
-    private void printlog(String teg, String log){
-        Log.i("MyDEBUG","FindTag :: "+teg+" :: rezalt = \n" + log + "\n ---------------------------------");
-    }
 
 }

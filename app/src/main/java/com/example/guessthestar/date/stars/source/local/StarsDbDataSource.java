@@ -45,29 +45,7 @@ public class StarsDbDataSource {
     }
 
 
-    public void getAllStar11() {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-               /* ArrayList<StarClass> stars = starsDao.getStars();
-                if (!stars.isEmpty()) {
-                    //callback.onMoviesLoaded(movies);
-                } else {
-                    //callback.onDataNotAvailable();
-                }*/
-            }
-        };
-        executor.execute(runnable);
-    }
 
-
-    public LiveData<List<StarClass>> getAllStar() {
-        return starsDao.getStarsListLD();
-    }
-
-    public LiveData<StarClass> getStar(int starId) {
-        return starsDao.getStarLD(starId);
-    }
 
     // количество элементов в DB для LiveData
     public LiveData<Integer> getCountStarsLD() {

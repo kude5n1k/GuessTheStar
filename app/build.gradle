@@ -11,7 +11,7 @@ android {
         minSdk 23
         targetSdk 32
         versionCode 1
-        versionName "1.0"
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -58,53 +58,40 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
 
-    androidTestImplementation 'androidx.test:runner:1.4.0'
-    androidTestImplementation 'androidx.test:rules:1.4.0'
-
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
 
-    //Okhttp3
-    def okhttp3Version = '5.0.0-alpha.9'
-    implementation "com.squareup.okhttp3:okhttp:$okhttp3Version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3Version" // логирование запросов
 
+    //test
+    // testCompile 'org.mockito:mockito-core:1.10.19'
+
+    
     //Retrofit
     def retrofitVersion = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"  //конвертирует JSON в POJO
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"  //конвертирует JSON в POJO ( Plain Old Java Class "Просто Java класс" )
     implementation "com.squareup.retrofit2:converter-simplexml:$retrofitVersion"
 
-    //Room
+
+    // Room (abstraction layer over SQLite)
     def room_version = "2.4.3"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
-    // Stetho - for debug sqlite
-    implementation 'com.facebook.stetho:stetho:1.6.0'
 
-    // Volley
-    implementation 'com.android.volley:volley:1.2.1'
-
-    //Gson
-    implementation 'com.google.code.gson:gson:2.9.1'
-
-    //парсинг HTML
+    // Jsoup (parses HTML)
     implementation 'org.jsoup:jsoup:1.15.3'
 
-    // Load Images
-    // Glide, picasso
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
+
+    // Glide (load Images)
+    implementation 'com.github.bumptech.glide:glide:4.14.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.0'
 
 
 
-
-
-    //test
-//    testCompile 'org.mockito:mockito-core:1.10.19'
 
 
 }

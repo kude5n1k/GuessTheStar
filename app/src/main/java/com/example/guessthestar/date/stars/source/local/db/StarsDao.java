@@ -21,16 +21,6 @@ public interface StarsDao {
     void saveStars(ArrayList<StarClass> arrStarClass);
 
 
-   // @Query("SELECT * FROM stars")
-   // ArrayList<StarClass> getStars();
-
-
-    @Query("SELECT * FROM stars")
-    LiveData<List<StarClass>> getStarsListLD();
-
-    @Query("SELECT * FROM stars WHERE id =:starId")
-    LiveData<StarClass> getStarLD(int starId);
-
     // количество элементов в DB для LiveData
     @Query("SELECT COUNT(id) FROM stars")
     LiveData<Integer> getCountStarsLD();
@@ -51,11 +41,7 @@ public interface StarsDao {
 
 
 
-
     @Query("DELETE FROM stars")
     void deleteStars();
-
-    @Delete
-    void deleteStars(StarClass starClass);
 
 }

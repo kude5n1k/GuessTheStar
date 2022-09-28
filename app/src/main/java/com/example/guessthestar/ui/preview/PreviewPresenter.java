@@ -17,7 +17,7 @@ import com.example.guessthestar.ui.body_test.BodyTestActivity;
 import java.util.ArrayList;
 
 
-public class PreviewPresenter extends BasePresenter<PreviewView>  implements PreviewPresenterCallback {
+public class PreviewPresenter extends BasePresenter<PreviewView>  {
 
     private final StarsRepository starsRepository;
     LiveData<Integer> countStarsLiveData;
@@ -32,8 +32,7 @@ public class PreviewPresenter extends BasePresenter<PreviewView>  implements Pre
         countStarsObserver = new Observer<Integer>(){
             @Override
             public void onChanged(@Nullable Integer count) {
-                //view.sendMessage("!-Live date-! "+count);
-                Log.i("MyDEBUG","PreviewPresenter :: LiveDate :: start : count="+count );
+                //Log.i("MyDEBUG","PreviewPresenter :: LiveDate :: start : count="+count );
                 resultCountStars(count);
             }
         };
@@ -85,10 +84,10 @@ public class PreviewPresenter extends BasePresenter<PreviewView>  implements Pre
         starsRepository.deleteStars();
     }
 
-    @Override
+
     public void sendMessage(String mess){
         view.sendMessage(mess);
-    };
+    }
 
 
 

@@ -18,8 +18,7 @@ public class InitStarObjects {
             String name = entry.getKey();
             String link = entry.getValue();
 
-            if(name.length()>1 && link.length()>1)
-            arrStarClass.add(new StarClass(name, link));
+            if(name.length()>1 && link.length()>1) arrStarClass.add(new StarClass(name, link));
 
         }
         return arrStarClass;

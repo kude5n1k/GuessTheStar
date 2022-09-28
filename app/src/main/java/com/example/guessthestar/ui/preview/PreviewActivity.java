@@ -8,21 +8,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
+
 
 import com.example.guessthestar.R;
 import com.example.guessthestar.date.DataManager;
 import com.example.guessthestar.date.stars.source.StarsRepository;
 import com.example.guessthestar.ui.base.BaseActivity;
-import com.facebook.stetho.Stetho;
 
 
-/**
- * MVP
- * mvp moxy
- * */
+
 
 public class PreviewActivity extends BaseActivity<PreviewPresenter> implements PreviewView  {
 
