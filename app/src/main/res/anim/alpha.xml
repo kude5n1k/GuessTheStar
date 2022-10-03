@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+android:interpolator="@android:anim/linear_interpolator">
+<alpha
+    android:fromAlpha="1.0"
+    android:toAlpha="0.1"
+
+    android:duration="500"
+
+    android:repeatCount="1"
+    android:repeatMode="reverse" />
+</set>
+
+
+<!--
+
+    прозрачность от 0.0 до 1.0(не прозрачный)
+    fromAlpha //прозрачность в начале анимации.
+    toAlpha  //прозрачность в конце анимации.
+
+    duration - продолжительность анимации.
+
+    repeatCount —  число повторений анимации, можно использовать значение infinity (бесконечность)
+    repeatMode — поведение анимации при ее окончании. restart (перезапустить без изменений) или reverse (изменить анимацию в обратном направлении)
+-->
+
+

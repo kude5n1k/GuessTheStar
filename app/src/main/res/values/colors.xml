@@ -8,6 +8,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="green">#4CAF50</color>
     <color name="gray">@android:color/darker_gray</color>
+    <color name="green">#4CAF50</color>
+
+
+    <drawable name="gray_400">#626263</drawable>
+    <drawable name="black_400">#4D000000</drawable>
+    <drawable name="green_400">#25EA2E</drawable>
+    <drawable name="red_400">#F0130E</drawable>
+
+
 </resources>
+
+

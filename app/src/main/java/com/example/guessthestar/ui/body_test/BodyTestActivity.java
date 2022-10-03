@@ -5,8 +5,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -22,10 +25,9 @@ import java.util.ArrayList;
 
 public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements BodyTestView {
 
-
     ImageView imageViewAvatar;
     ListView listViewName;
-    ConstraintLayout ConstLayotActivityTes;
+    ConstraintLayout ConstLayoutActivityTes;
 
 
     @NonNull
@@ -43,7 +45,8 @@ public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements
 
         imageViewAvatar = findViewById(R.id.imageViewAvatar);
         listViewName = findViewById(R.id.ListName);
-        ConstLayotActivityTes = findViewById(R.id.constrainLayotActivityTestId);
+        ConstLayoutActivityTes = findViewById(R.id.constrainLayotActivityTestId);
+
 
         presenter.createNewTest();
     }
@@ -59,31 +62,65 @@ public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements
         return imageViewAvatar;
     }
 
+
+
     @Override
     public void setNames(ArrayList<String> arrayListStarsRandom) {
+
         ArrayAdapter<String> adapterArrName = new ArrayAdapter<>(
                 getApplicationContext(),
-                R.layout.element_of_about,
+                R.layout.element_normal,
                 arrayListStarsRandom);
 
         // show names + waiting answer
         listViewName.setAdapter(adapterArrName);
-        setStatusListName(true);
         listViewName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 presenter.checkAnswer(view, position); // i = 0;1;2
-
-                // !! доработать Изменить цвет фона выбранного элемента в ListView !!!!!!!!!!
              }
         });
     }
 
 
+
+
     @Override
-    public void setStatusListName(boolean status) {
-        listViewName.setEnabled(status);
+    public void answerCorrect(View viewVariant) {
+        viewVariant.setBackgroundResource(R.drawable.form_element_ok);
+
+        listViewName.setOnItemClickListener(null); //отключиение прослушивания кликов
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                presenter.createNewTest();
+            }
+        },1000);
     }
+
+    @Override
+    public void answerNotCorrect(View viewVariant) {
+        Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        animAlpha.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                viewVariant.setBackgroundResource(R.drawable.form_element_not_ok);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                viewVariant.setBackgroundResource(R.drawable.form_element_normal);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        viewVariant.startAnimation(animAlpha);
+    }
+
 
 
     @Override

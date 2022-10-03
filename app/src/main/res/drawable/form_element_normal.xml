@@ -6,18 +6,16 @@
 
     <gradient
         android:angle="90"
-        android:endColor="#8A8989"
-        android:startColor="#4D000000"
+        android:endColor="@drawable/gray_400"
+        android:startColor="@drawable/black_400"
         android:type="linear" />
 
     <stroke
         android:width="0.5dp"
         android:color="#FF000000" />
 
-    <padding
-        android:bottom="15dp"
-        android:left="15dp"
-        android:right="15dp"
-        android:top="15dp" />
+
 
 </shape>
+
+

@@ -5,7 +5,7 @@
     android:id="@+id/constrainLayotActivityTestId"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_stars"
+    android:background="@drawable/back_fon"
     app:layout_constraintGuide_percent="30"
     tools:context=".ui.body_test.BodyTestActivity">
 
@@ -49,4 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

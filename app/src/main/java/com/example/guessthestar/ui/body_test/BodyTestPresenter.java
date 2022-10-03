@@ -1,7 +1,6 @@
 package com.example.guessthestar.ui.body_test;
 
-import android.graphics.Color;
-import android.os.Handler;
+
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -97,9 +96,9 @@ public class BodyTestPresenter extends BasePresenter<BodyTestView> {
     public void checkAnswer(View viewVariant, int position) {
         try {
             if (rightStarKey == position) {
-                answerCorrect(viewVariant);
+                view.answerCorrect(viewVariant);
             } else {
-                answerNotCorrect(viewVariant);
+                view.answerNotCorrect(viewVariant);
             }
         }catch (Exception ignored){
             view.toastError("ERROR\n"+R.string.ERROR_check_variant);
@@ -107,39 +106,9 @@ public class BodyTestPresenter extends BasePresenter<BodyTestView> {
     }
 
 
-    public void answerCorrect(View viewVariant) {
-        view.setStatusListName(false);
-        setColor(10 , viewVariant, Color.GREEN);
-        //setColor(300, viewVariant, 0);
-        //Toast.makeText(getApplicationContext(), "you guessed fuking star", Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                createNewTest();
-            }
-        },800);
-    }
 
 
-    private void answerNotCorrect(View viewVariant) {
-        setColor(10, viewVariant, Color.RED);
-        setColor(300, viewVariant, 0);
-        //Toast.makeText(getApplicationContext(), "you not guessed star", Toast.LENGTH_SHORT).show();
-    }
 
-
-    private void setColor(int time, View viewVariant, int color){
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(color==0){
-                    viewVariant.setBackgroundColor(R.drawable.back_stars);
-                }else {
-                    viewVariant.setBackgroundColor(color);
-                }
-            }
-        }, time);
-    }
 
 
 

@@ -6,6 +6,8 @@
 
 ### Architectural pattern: MVP (Model–View–Presenter)
 
+### Design Patterns(GoF): Singleton
+
 
 # Libraries
 

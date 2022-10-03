@@ -3,10 +3,14 @@
     android:id="@+id/element_of_about"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/form_element_of_about"
+
+    android:background="@drawable/form_element_normal"
+
     android:gravity="center_vertical|center_horizontal"
     android:padding="10dp"
-    android:text="-"
     android:textSize="20sp">
 
 </TextView>
+
+
+
