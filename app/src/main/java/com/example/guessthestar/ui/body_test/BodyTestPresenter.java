@@ -1,6 +1,7 @@
 package com.example.guessthestar.ui.body_test;
 
 
+import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;

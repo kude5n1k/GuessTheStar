@@ -5,9 +5,7 @@
 * Data source [wikipedia](https://en.wikipedia.org/wiki/AFI%27s_100_Years...100_Stars)
 
 ### Architectural pattern: MVP (Model–View–Presenter)
-
-### Design Patterns(GoF): Singleton
-
+ 
 
 # Libraries
 
@@ -16,12 +14,13 @@
 * *JUnit4* for testing
 
 
-
 * [**Jsoup**][jsoup] for parses HTML
 * [**Glide**][glide] for image loading
+* [**Animation**][confetti] for to show the right/wrong choice
 
 [jsoup]: https://jsoup.org
 [glide]: https://github.com/bumptech/glide
+[confetti]:https://github.com/jinatonic/confetti
 
 
  
