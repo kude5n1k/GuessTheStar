@@ -5,21 +5,16 @@ import android.util.Log;
 
 import com.example.guessthestar.date.stars.StarClass;
 import com.example.guessthestar.date.stars.source.remote.StarsDownloadManager;
-import com.example.guessthestar.date.stars.source.remote.downloadInfoText.jsoup.utils.FindTag;
-import com.example.guessthestar.date.stars.source.remote.downloadInfoText.jsoup.utils.InitStarObjects;
-import com.example.guessthestar.date.stars.source.remote.downloadInfoText.jsoup.utils.MergeArr;
+import com.example.guessthestar.date.stars.source.remote.downloadInfoText.jsoup.utils.FindNameLink;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class ParseURL {
     private String url = "https://en.wikipedia.org/wiki/AFI%27s_100_Years...100_Stars";
-
-    private ArrayList<StarClass> arrStarClass = new ArrayList();
 
 
     private static ParseURL sInstance;
@@ -42,15 +37,7 @@ public class ParseURL {
 
 
     private class ParseURLAsyncTask extends AsyncTask<String, Void, Void> {
-
-        ArrayList<String> arrValidName = new ArrayList();
-        HashMap<String, String> arrAltNameLink = new HashMap<>();
-
-        HashMap<String, String> arrStarsInfo = new HashMap<>();
-
-        FindTag findTag = new FindTag();
-        MergeArr mergeArr = new MergeArr();
-        InitStarObjects initStarObjects = new InitStarObjects();
+        private ArrayList<StarClass> arrStarClass = new ArrayList();
 
         @Override
         protected Void doInBackground(String... strings) {
@@ -65,14 +52,9 @@ public class ParseURL {
                 Document doc = Jsoup.connect(strings[0]).get();
 
                 // поиск строк для объекта StarClass
-                arrValidName = findTag.findName(doc);
-                arrAltNameLink = findTag.findAltNameAndLink(doc);
+                FindNameLink findNameLink = new FindNameLink(doc);
+                arrStarClass = findNameLink.getArrStarClass();
 
-                // слияние в результирующий массив с данными
-                arrStarsInfo = mergeArr.start(arrValidName, arrAltNameLink);
-
-                // массив с объектами Star
-                arrStarClass = initStarObjects.start(arrStarsInfo);
 
             } catch (Throwable t) {
                 Log.i("MyDEBUG","ParseURLAsyncTask :: ERROR :: t = "+t.getMessage());

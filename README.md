@@ -1,5 +1,11 @@
 <h1 align="center">Guess The Star</h1>
 
+
+![Image text](https://github.com/kude5n1k/GuessTheStar/blob/master/assets/screenshot-2022-10-07_off.png)
+![Image text](https://github.com/kude5n1k/GuessTheStar/blob/master/assets/screenshot-2022-10-07_on.png)
+![](https://github.com/kude5n1k/GuessTheStar/blob/master/assets/gif_v1.gif)
+
+
 * A simple android project that demonstrates how to implement Android Architecture Components.
 * The application is made in the form of a test for knowledge of the greatest movie stars in 100 years according to AFI.
 * Data source [wikipedia](https://en.wikipedia.org/wiki/AFI%27s_100_Years...100_Stars)
