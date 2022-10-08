@@ -1,8 +1,8 @@
-package com.example.guessthestar.View;
+package com.example.guessthestar.ui;
 
 
-import static com.example.guessthestar.Model.DataStarClass.URL_STAR;
-import static com.example.guessthestar.Model.DataStarClass.getSizeArrayListStars;
+import static com.example.guessthestar.DataStarClass.URL_STAR;
+import static com.example.guessthestar.DataStarClass.getSizeArrayListStars;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,14 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.guessthestar.Model.DownloadTask;
+import com.example.guessthestar.DownloadTask;
 import com.example.guessthestar.R;
 
-import java.io.File;
-
-public class MainActivity extends AppCompatActivity {
+public class PreviewActivity extends AppCompatActivity {
 
     TextView textView;
     ProgressBar progressBar;
@@ -31,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_preview);
                                                                                  Log.i("MyDEBUG","MainActivity :: onCreate :: start " );
         textView = findViewById(R.id.textView_download);
         progressBar = findViewById(R.id.progressBar_download);
@@ -45,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             if (countStars < 1)  {
                 downloadingNames();
             }else {
-                textView.setText("we have " + countStars + "  stars");
+                textView.setText("have " + countStars + "  stars");
                 progressBar.setProgress(countStars);
                 buttonStart.setEnabled(true);
             }
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onDownloadComplete() {
-                textView.setText("we have " + getSizeArrayListStars() + "  star");
+                textView.setText("have " + getSizeArrayListStars() + "  star");
                 if(getSizeArrayListStars() >= 1 ) {
                     buttonStart.setEnabled(true);
                 }else {
@@ -85,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void startApp(View view) {
-        Intent intent = new Intent(getApplicationContext(), ListStarActivity.class);
+        Intent intent = new Intent(getApplicationContext(), TestActivity.class);
         startActivity(intent);
     }
 

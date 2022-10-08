@@ -1,25 +1,17 @@
-package com.example.guessthestar.Model;
+package com.example.guessthestar;
 
-import static com.example.guessthestar.Model.DataStarClass.getSizeArrayListStars;
+import static com.example.guessthestar.DataStarClass.getSizeArrayListStars;
 
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
 
-import com.example.guessthestar.Presenter.StarClass;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

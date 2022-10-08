@@ -1,7 +1,7 @@
-package com.example.guessthestar.Presenter;
+package com.example.guessthestar;
 
-import static com.example.guessthestar.Model.DataStarClass.getSizeArrayListStars;
-import static com.example.guessthestar.Model.DataStarClass.getStar;
+import static com.example.guessthestar.DataStarClass.getSizeArrayListStars;
+import static com.example.guessthestar.DataStarClass.getStar;
 
 
 import java.util.ArrayList;

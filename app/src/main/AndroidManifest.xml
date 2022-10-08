@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GuessTheStar">
         <activity
-            android:name=".View.ListStarActivity"
+            android:name=".ui.TestActivity"
             android:exported="false" />
         <activity
-            android:name=".View.MainActivity"
+            android:name=".ui.PreviewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,4 @@
-package com.example.guessthestar.Model;
-
-import com.example.guessthestar.Presenter.StarClass;
+package com.example.guessthestar;
 
 import java.util.ArrayList;
 

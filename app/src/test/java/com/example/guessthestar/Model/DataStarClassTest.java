@@ -1,6 +1,7 @@
 package com.example.guessthestar.Model;
 
-import com.example.guessthestar.Presenter.StarClass;
+import com.example.guessthestar.DataStarClass;
+import com.example.guessthestar.StarClass;
 
 import org.junit.Before;
 import org.junit.Test;

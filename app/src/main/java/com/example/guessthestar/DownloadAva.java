@@ -1,4 +1,4 @@
-package com.example.guessthestar.Model;
+package com.example.guessthestar;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

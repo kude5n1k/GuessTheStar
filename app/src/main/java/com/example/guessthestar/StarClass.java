@@ -1,4 +1,4 @@
-package com.example.guessthestar.Presenter;
+package com.example.guessthestar;
 
 
 import androidx.annotation.NonNull;

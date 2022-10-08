@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/back_stars"
     app:layout_constraintGuide_percent="30"
-    tools:context=".View.ListStarActivity">
+    tools:context=".ui.TestActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"

@@ -2,6 +2,8 @@ package com.example.guessthestar.Presenter;
 
 import static org.junit.Assert.assertEquals;
 
+import com.example.guessthestar.RandomClass;
+
 import org.junit.Before;
 import org.junit.Test;
 

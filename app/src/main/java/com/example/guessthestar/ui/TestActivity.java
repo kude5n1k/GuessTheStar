@@ -1,4 +1,4 @@
-package com.example.guessthestar.View;
+package com.example.guessthestar.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,12 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.guessthestar.Model.DownloadAva;
-import com.example.guessthestar.Presenter.RandomClass;
-import com.example.guessthestar.Presenter.StarClass;
+import com.example.guessthestar.DownloadAva;
+import com.example.guessthestar.RandomClass;
+import com.example.guessthestar.StarClass;
 import com.example.guessthestar.R;
 
-public class ListStarActivity extends AppCompatActivity {
+public class TestActivity extends AppCompatActivity {
     ImageView imageViewAvatar;
     ListView listView;
     ConstraintLayout ConstLayotActivityTes;
@@ -26,7 +26,7 @@ public class ListStarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_star);
+        setContentView(R.layout.activity_test);
 
         imageViewAvatar = findViewById(R.id.imageViewAvatar);
         listView = findViewById(R.id.ListName);
