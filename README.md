@@ -4,7 +4,7 @@
 * A simple android project is made in the form of a test for knowledge of 
 * the greatest movie stars in 100 years according to AFI.
 * Data source [wikipedia](https://en.wikipedia.org/wiki/AFI%27s_100_Years...100_Stars)
-
+* version 1.0
 
 
 ![Image text](https://github.com/kude5n1k/GuessTheStar/blob/guess_the_star_v1.0/assets/screenshot-2022-10-09.png)
