@@ -57,7 +57,7 @@ public class PreviewPresenter extends BasePresenter<PreviewView>  {
 
         }else {
             // Ready To Start (данные есть - готовы начать)
-            view.sendMessage("we have " + countStars + "  stars");
+            view.sendMessage("have " + countStars + "  stars");
             view.progressUpdate(countStars);
             view.isButtonStartTestEnabled(true);
         }
