@@ -99,41 +99,52 @@ public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements
 
     @Override
     public void answerCorrect(View viewVariant) {
-        viewVariant.setBackgroundResource(R.drawable.form_element_ok); // выделить элемент зеленым
+        try {
+            viewVariant.setBackgroundResource(R.drawable.form_element_ok); // выделить элемент зеленым
 
-        listViewName.setOnItemClickListener(null); //отключиение прослушивания кликов
+            listViewName.setOnItemClickListener(null); //отключиение прослушивания кликов
 
-        // анимация конфети
-        CommonConfetti.rainingConfetti(ConstLayoutActivityTes, new int[]{Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.WHITE})
-                .oneShot()
-                .setTTL(3000)
-                .enableFadeOut(new Interpolator() {
-                    @Override
-                    public float getInterpolation(float v) {
-                        // затухание
-                        if (v>=0.8)return 0.2f;
-                        if (v>=0.6)return 0.4f;
-                        if (v>=0.4)return 0.6f;
-                        if (v>=0.2)return 0.8f;
-                        return 1;
-                    }
-                })
-                .setConfettiAnimationListener(new ConfettiManager.ConfettiAnimationListener() {
-                    @Override
-                    public void onAnimationStart(ConfettiManager confettiManager) {}
+            // анимация конфети
+            CommonConfetti.rainingConfetti(ConstLayoutActivityTes, new int[]{Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.WHITE})
+                    .oneShot()
+                    .setTTL(3000)
+                    .enableFadeOut(new Interpolator() {
+                        @Override
+                        public float getInterpolation(float v) {
+                            // затухание
+                            if (v >= 0.8) return 0.2f;
+                            if (v >= 0.6) return 0.4f;
+                            if (v >= 0.4) return 0.6f;
+                            if (v >= 0.2) return 0.8f;
+                            return 1;
+                        }
+                    })
+                    .setConfettiAnimationListener(new ConfettiManager.ConfettiAnimationListener() {
+                        @Override
+                        public void onAnimationStart(ConfettiManager confettiManager) {
+                        }
 
-                    @Override
-                    public void onAnimationEnd(ConfettiManager confettiManager) {
-                        if (listViewName.getOnItemClickListener() == null)presenter.createNewTest();
-                    }
+                        @Override
+                        public void onAnimationEnd(ConfettiManager confettiManager) {
+                            if (listViewName.getOnItemClickListener() == null)
+                                presenter.createNewTest();
+                        }
 
-                    @Override
-                    public void onConfettoEnter(Confetto confetto) {}
-                    @Override
-                    public void onConfettoExit(Confetto confetto) {}
-                })
-                .animate();
+                        @Override
+                        public void onConfettoEnter(Confetto confetto) {
+                        }
+
+                        @Override
+                        public void onConfettoExit(Confetto confetto) {
+                        }
+                    })
+                    .animate();
+
+        }catch (Exception ignored){
+            //toastError("ERROR 2\n"+R.string.ERROR_uploading_avatar);
+        }
     }
+
 
 
 
