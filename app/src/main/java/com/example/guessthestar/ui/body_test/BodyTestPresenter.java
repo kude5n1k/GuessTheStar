@@ -35,18 +35,19 @@ public class BodyTestPresenter extends BasePresenter<BodyTestView> {
          get random right name from x[] :: y={key,line} :: y={0,5}
         */
 
-        GenerateRandom generateRandom = new GenerateRandom();
-        // три рандом звезды от 1 до 49
-        int[] arrStarsLines = generateRandom.getLinesArrStarsVariants(countAllStars); // варианты звезд
+        try {
+            GenerateRandom generateRandom = new GenerateRandom();
+            // три рандом звезды от 1 до 49
+            int[] arrStarsLines = generateRandom.getLinesArrStarsVariants(countAllStars); // варианты звезд
 
-        // правильный ответ key [0,1,2] и его значение [1-49]
-        HashMap<Integer, Integer> keyAndLink = generateRandom.getLineRightStar(arrStarsLines);
-         rightStarKey=-1; // правильная звезда key
-        int rightStarLine=-1; // правильная звезда line
-        for(Map.Entry<Integer, Integer> entry : keyAndLink.entrySet()) {
-            rightStarKey = entry.getKey();
-            rightStarLine = entry.getValue();
-        }
+            // правильный ответ key [0,1,2] и его значение [1-49]
+            HashMap<Integer, Integer> keyAndLink = generateRandom.getLineRightStar(arrStarsLines);
+            rightStarKey = -1; // правильная звезда key
+            int rightStarLine = -1; // правильная звезда line
+            for (Map.Entry<Integer, Integer> entry : keyAndLink.entrySet()) {
+                rightStarKey = entry.getKey();
+                rightStarLine = entry.getValue();
+            }
 
 /*
         Log.i("MyDEBUG","BodyTestPresenter :: " +
@@ -56,11 +57,14 @@ public class BodyTestPresenter extends BasePresenter<BodyTestView> {
         );
 */
 
-        // ava for nuw test
-        setAva(rightStarLine);
+            // ava for nuw test
+            setAva(rightStarLine);
 
-        // variant name for nuw test
-        setNames(arrStarsLines);
+            // variant name for nuw test
+            setNames(arrStarsLines);
+        }catch (Exception ignored){
+            //view.toastError("ERROR 1\n"+R.string.ERROR_uploading_avatar);
+        }
     }
 
 
