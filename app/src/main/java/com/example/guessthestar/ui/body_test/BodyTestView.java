@@ -19,6 +19,6 @@ public interface BodyTestView extends BaseView {
     void answerNotCorrect(View viewVariant);
 
 
-    void toastError(String mess);
+    void toastError();
 
 }

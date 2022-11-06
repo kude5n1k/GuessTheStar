@@ -1,7 +1,6 @@
 package com.example.guessthestar.ui.body_test;
 
 
-import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -30,41 +29,44 @@ public class BodyTestPresenter extends BasePresenter<BodyTestView> {
 
     /** Activity ===> Presenter */
     public void createNewTest() {
-        /*
-         get 3 random number from all list stars :: x[1...49] : x{5,12,45}
-         get random right name from x[] :: y={key,line} :: y={0,5}
-        */
-
-        try {
-            GenerateRandom generateRandom = new GenerateRandom();
-            // три рандом звезды от 1 до 49
-            int[] arrStarsLines = generateRandom.getLinesArrStarsVariants(countAllStars); // варианты звезд
-
-            // правильный ответ key [0,1,2] и его значение [1-49]
-            HashMap<Integer, Integer> keyAndLink = generateRandom.getLineRightStar(arrStarsLines);
-            rightStarKey = -1; // правильная звезда key
-            int rightStarLine = -1; // правильная звезда line
-            for (Map.Entry<Integer, Integer> entry : keyAndLink.entrySet()) {
-                rightStarKey = entry.getKey();
-                rightStarLine = entry.getValue();
-            }
-
-/*
-        Log.i("MyDEBUG","BodyTestPresenter :: " +
-                "\ncountAllStars = " + countAllStars+
-                "\narrStarsLines = " + arrStarsLines[0] + " " + arrStarsLines[1] + " " +arrStarsLines[2] +
-                "\nrightStarKey = " + rightStarKey + " rightStarLine = " + rightStarLine
-        );
-*/
-
-            // ava for nuw test
-            setAva(rightStarLine);
-
-            // variant name for nuw test
-            setNames(arrStarsLines);
-        }catch (Exception ignored){
-            //view.toastError("ERROR 1\n"+R.string.ERROR_uploading_avatar);
+        if (countAllStars < 3) {
+            view.toastError();
+            return;
         }
+            /*
+             get 3 random number from all list stars :: x[1...49] : x{5,12,45}
+             get random right name from x[] :: y={key,line} :: y={0,5}
+            */
+
+        GenerateRandom generateRandom = new GenerateRandom();
+        // три рандом звезды от 1 до 49
+        int[] arrStarsLines = generateRandom.getLinesArrStarsVariants(countAllStars); // варианты звезд
+
+        // правильный ответ key [0,1,2] и его значение [1-49]
+        HashMap<Integer, Integer> keyAndLink = generateRandom.getLineRightStar(arrStarsLines);
+        rightStarKey = -1; // правильная звезда key
+        int rightStarLine = -1; // правильная звезда line
+        for (Map.Entry<Integer, Integer> entry : keyAndLink.entrySet()) {
+            rightStarKey = entry.getKey();
+            rightStarLine = entry.getValue();
+        }
+
+
+            /*
+            Log.i("MyDEBUG","BodyTestPresenter :: " +
+                    "\ncountAllStars = " + countAllStars+
+                    "\narrStarsLines = " + arrStarsLines[0] + " " + arrStarsLines[1] + " " +arrStarsLines[2] +
+                    "\nrightStarKey = " + rightStarKey + " rightStarLine = " + rightStarLine
+            );
+            */
+
+        // ava for nuw test
+        setAva(rightStarLine);
+
+        // variant name for nuw test
+        setNames(arrStarsLines);
+
+
     }
 
 
@@ -75,9 +77,7 @@ public class BodyTestPresenter extends BasePresenter<BodyTestView> {
                     .with(view.getContextOwner())
                     .load("https://"+starsRepository.getAddressAva(rightStarLine))
                     .into(view.getImageViewAva());
-        }catch (Exception ignored){
-            view.toastError("ERROR\n"+R.string.ERROR_uploading_avatar);
-        }
+        }catch (Exception ignored){}
     }
 
 
@@ -86,10 +86,7 @@ public class BodyTestPresenter extends BasePresenter<BodyTestView> {
         try {
             ArrayList<String> nameStarsVariants = starsRepository.getNameStarsVariants(arrStarsLines);
             view.setNames(nameStarsVariants);
-        }catch (Exception ignored){
-            view.toastError("ERROR\n"+R.string.ERROR_uploading_list_names);
-        }
-
+        } catch (Exception ignored) {}
     }
 
 
@@ -99,14 +96,10 @@ public class BodyTestPresenter extends BasePresenter<BodyTestView> {
 
     /**  Activity ===>  Presenter  ===>  Activity */
     public void checkAnswer(View viewVariant, int position) {
-        try {
-            if (rightStarKey == position) {
-                view.answerCorrect(viewVariant);
-            } else {
-                view.answerNotCorrect(viewVariant);
-            }
-        }catch (Exception ignored){
-            view.toastError("ERROR\n"+R.string.ERROR_check_variant);
+        if (rightStarKey == position) {
+            view.answerCorrect(viewVariant);
+        } else {
+            view.answerNotCorrect(viewVariant);
         }
     }
 

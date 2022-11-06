@@ -4,10 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -25,15 +23,9 @@ import com.example.guessthestar.date.stars.source.StarsRepository;
 import com.example.guessthestar.ui.base.BaseActivity;
 import com.github.jinatonic.confetti.CommonConfetti;
 import com.github.jinatonic.confetti.ConfettiManager;
-import com.github.jinatonic.confetti.ConfettiSource;
-import com.github.jinatonic.confetti.ConfettoGenerator;
-import com.github.jinatonic.confetti.Utils;
-import com.github.jinatonic.confetti.confetto.BitmapConfetto;
 import com.github.jinatonic.confetti.confetto.Confetto;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements BodyTestView {
 
@@ -78,7 +70,6 @@ public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements
 
     @Override
     public void setNames(ArrayList<String> arrayListStarsRandom) {
-
         ArrayAdapter<String> adapterArrName = new ArrayAdapter<>(
                 getApplicationContext(),
                 R.layout.element_normal,
@@ -90,7 +81,7 @@ public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 presenter.checkAnswer(view, position); // i = 0;1;2
-             }
+            }
         });
     }
 
@@ -99,50 +90,47 @@ public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements
 
     @Override
     public void answerCorrect(View viewVariant) {
-        try {
-            viewVariant.setBackgroundResource(R.drawable.form_element_ok); // выделить элемент зеленым
 
-            listViewName.setOnItemClickListener(null); //отключиение прослушивания кликов
+        viewVariant.setBackgroundResource(R.drawable.form_element_ok); // выделить элемент зеленым
 
-            // анимация конфети
-            CommonConfetti.rainingConfetti(ConstLayoutActivityTes, new int[]{Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.WHITE})
-                    .oneShot()
-                    .setTTL(3000)
-                    .enableFadeOut(new Interpolator() {
-                        @Override
-                        public float getInterpolation(float v) {
-                            // затухание
-                            if (v >= 0.8) return 0.2f;
-                            if (v >= 0.6) return 0.4f;
-                            if (v >= 0.4) return 0.6f;
-                            if (v >= 0.2) return 0.8f;
-                            return 1;
-                        }
-                    })
-                    .setConfettiAnimationListener(new ConfettiManager.ConfettiAnimationListener() {
-                        @Override
-                        public void onAnimationStart(ConfettiManager confettiManager) {
-                        }
+        listViewName.setOnItemClickListener(null); //отключиение прослушивания кликов
 
-                        @Override
-                        public void onAnimationEnd(ConfettiManager confettiManager) {
-                            if (listViewName.getOnItemClickListener() == null)
-                                presenter.createNewTest();
-                        }
+        // анимация конфети
+        CommonConfetti.rainingConfetti(ConstLayoutActivityTes, new int[]{Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.WHITE})
+                .oneShot()
+                .setTTL(3000)
+                .enableFadeOut(new Interpolator() {
+                    @Override
+                    public float getInterpolation(float v) {
+                        // затухание
+                        if (v >= 0.8) return 0.2f;
+                        if (v >= 0.6) return 0.4f;
+                        if (v >= 0.4) return 0.6f;
+                        if (v >= 0.2) return 0.8f;
+                        return 1;
+                    }
+                })
+                .setConfettiAnimationListener(new ConfettiManager.ConfettiAnimationListener() {
+                    @Override
+                    public void onAnimationStart(ConfettiManager confettiManager) {
+                    }
 
-                        @Override
-                        public void onConfettoEnter(Confetto confetto) {
-                        }
+                    @Override
+                    public void onAnimationEnd(ConfettiManager confettiManager) {
+                        if (listViewName.getOnItemClickListener() == null)
+                            presenter.createNewTest();
+                    }
 
-                        @Override
-                        public void onConfettoExit(Confetto confetto) {
-                        }
-                    })
-                    .animate();
+                    @Override
+                    public void onConfettoEnter(Confetto confetto) {
+                    }
 
-        }catch (Exception ignored){
-            //toastError("ERROR 2\n"+R.string.ERROR_uploading_avatar);
-        }
+                    @Override
+                    public void onConfettoExit(Confetto confetto) {
+                    }
+                })
+                .animate();
+
     }
 
 
@@ -173,7 +161,9 @@ public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements
 
 
     @Override
-    public void toastError(String mess){
+    public void toastError(){
+        String mess = getString(R.string.ERROR_not_enough_stars);
+
         Toast.makeText(this, mess, Toast.LENGTH_LONG).show();
         Log.i("MyDEBUG","BodyTestActivity :: toastError :: " + mess);
     }
