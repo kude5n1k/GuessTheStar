@@ -8,6 +8,8 @@ import com.example.guessthestar.date.stars.source.local.StarsDbDataSource;
 import com.example.guessthestar.date.stars.source.remote.StarsDownloadManager;
 import com.example.guessthestar.ui.preview.PreviewPresenter;
 
+import org.jsoup.nodes.Document;
+
 import java.util.ArrayList;
 
 public class StarsRepository {
@@ -69,15 +71,14 @@ public class StarsRepository {
 
     /**Callback*/
     public interface DownloadStarCallback {
-        void downloadComplete(ArrayList<StarClass> arrStarClass);
+        void downloadComplete(Document doc);
         void downloadError(String mess);
     }
     public void getStarsFromRemoteDataSource(final PreviewPresenter.PreviewPresenterCallback previewPresenterCallback){
         starsDownloadManager.downloadedStars(new DownloadStarCallback(){
             @Override
-            public void downloadComplete(ArrayList<StarClass> arrStarClass){
-                deleteStars();  // clear DB
-                setAllStar(arrStarClass);   // save in DB
+            public void downloadComplete(Document doc){
+                foundNameAndLink(doc);
             }
             @Override
             public void downloadError(String mess){
@@ -85,6 +86,18 @@ public class StarsRepository {
             }
         });
 
+    }
+
+
+    // parse DOM, and found Stars name and link avatar
+    public void foundNameAndLink(Document doc){
+        // поиск строк для объекта StarClass
+        FindNameAndAvaLink findNameAndAvaLink = new FindNameAndAvaLink(doc);
+        ArrayList<StarClass> arrStarClass = findNameAndAvaLink.getArrStarClass();
+        if (arrStarClass != null){
+            deleteStars();  // clearing DB
+            setAllStar(arrStarClass);   // save in DB
+        }
     }
 
 

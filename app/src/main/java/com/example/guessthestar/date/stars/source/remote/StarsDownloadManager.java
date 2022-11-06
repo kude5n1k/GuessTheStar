@@ -1,10 +1,8 @@
 package com.example.guessthestar.date.stars.source.remote;
 
-import com.example.guessthestar.date.stars.StarClass;
-import com.example.guessthestar.date.stars.source.StarsRepository;
-import com.example.guessthestar.date.stars.source.remote.downloadInfoText.jsoup.ParseURL;
+import com.example.guessthestar.date.stars.source.StarsRepositoryManager;
 
-import java.util.ArrayList;
+import org.jsoup.nodes.Document;
 
 public class StarsDownloadManager {
 
@@ -27,16 +25,16 @@ public class StarsDownloadManager {
 
     /**Callback*/
     public interface StDlMngCallback {
-        void downloadComplete(ArrayList<StarClass> arrStarClass);
+        void downloadComplete(Document doc);
         void downloadError(String mess);
     }
 
-    public void downloadedStars(final StarsRepository.DownloadStarCallback downloadStarCallback) {
+    public void downloadedStars(final StarsRepositoryManager.DownloadStarCallback downloadStarCallback) {
 
         parseURL.startRequest(new StDlMngCallback(){
             @Override
-            public void downloadComplete(ArrayList<StarClass> arrStarClass) {
-                downloadStarCallback.downloadComplete(arrStarClass);
+            public void downloadComplete(Document doc) {
+                downloadStarCallback.downloadComplete(doc);
             }
             @Override
             public void downloadError(String mess) {
