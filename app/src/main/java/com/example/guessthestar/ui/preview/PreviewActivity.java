@@ -1,7 +1,6 @@
 package com.example.guessthestar.ui.preview;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -20,7 +19,6 @@ import com.example.guessthestar.ui.base.BaseActivity;
 
 
 public class PreviewActivity extends BaseActivity<PreviewPresenter> implements PreviewView  {
-
     TextView textView;
     ProgressBar progressBar;
     Button buttonStartTest;
@@ -39,7 +37,6 @@ public class PreviewActivity extends BaseActivity<PreviewPresenter> implements P
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview);
 
-        //Log.i("MyDEBUG","MainActivity :: onCreate :: start " );
         textView = findViewById(R.id.textView_status);
         progressBar = findViewById(R.id.progressBar_download);
         progressBar.setMax(40);
@@ -63,7 +60,7 @@ public class PreviewActivity extends BaseActivity<PreviewPresenter> implements P
 
 
 
-    /** Buttons (Activity ===> Presenter)  */
+    /** Buttons */
     public void downloadStars(View view) {
         presenter.downloadedStars(); // скачиваем данные по звездам
     }
@@ -91,15 +88,30 @@ public class PreviewActivity extends BaseActivity<PreviewPresenter> implements P
         progressBar.setProgress(progress);
     }
 
-    @Override
-    public void isButtonStartTestEnabled(boolean status){
-        buttonStartTest.setEnabled(status);
-        if(status) {
+            progressBar.setProgress(count);
+
+            buttonStartTest.setEnabled(true);
             buttonStartTest.setBackgroundColor(ContextCompat.getColor(this, R.color.green));
+
         }else {
+            // not Ready To Start
+            sendMessage(getString(R.string.need_downloaded_stars));
+
+            progressBar.setProgress(0);
+
+            buttonStartTest.setEnabled(false);
             buttonStartTest.setBackgroundColor(ContextCompat.getColor(this, R.color.gray));
         }
+     }
+
+
+    @Override
+    public void sendMessage(String mess) {
+        textView.setText(mess);
     }
+
+
+
 
 
 }
