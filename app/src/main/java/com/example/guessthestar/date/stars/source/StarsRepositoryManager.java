@@ -12,23 +12,23 @@ import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 
-public class StarsRepository {
+public class StarsRepositoryManager {
 
-    private static StarsRepository sInstance;
+    private static StarsRepositoryManager sInstance;
     private StarsDbDataSource starsDbDataSource;
     private StarsDownloadManager starsDownloadManager;
 
 
-    private StarsRepository(StarsDownloadManager starsDownloadManager,
-                            StarsDbDataSource starsDbDataSource){
+    private StarsRepositoryManager(StarsDownloadManager starsDownloadManager,
+                                   StarsDbDataSource starsDbDataSource){
         this.starsDownloadManager = starsDownloadManager;
         this.starsDbDataSource = starsDbDataSource;
     }
 
-    public static StarsRepository getsInstance(StarsDownloadManager starsDownloadManager,
-                                               StarsDbDataSource starsDbDataSource){
+    public static StarsRepositoryManager getsInstance(StarsDownloadManager starsDownloadManager,
+                                                      StarsDbDataSource starsDbDataSource){
         if (sInstance==null){
-            sInstance = new StarsRepository(starsDownloadManager, starsDbDataSource);
+            sInstance = new StarsRepositoryManager(starsDownloadManager, starsDbDataSource);
         }
         return sInstance;
     }
@@ -58,7 +58,7 @@ public class StarsRepository {
     }
 
     public void deleteStars(){
-        starsDbDataSource.clearAllStars();
+        starsDbDataSource.clearingAllStars();
     }
 
 

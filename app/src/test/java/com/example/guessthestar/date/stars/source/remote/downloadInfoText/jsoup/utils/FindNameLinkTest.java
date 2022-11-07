@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.example.guessthestar.date.stars.StarClass;
+import com.example.guessthestar.date.stars.source.FindNameAndAvaLink;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,20 +20,20 @@ import java.util.HashMap;
 public class FindNameLinkTest {
 
     Document doc;
-    FindNameLink findNameLink;
+    FindNameAndAvaLink findNameAndAvaLink;
 
 
     @Before
     public void setUp() throws Exception {
         //doc = Jsoup.connect("https://en.wikipedia.org/wiki/AFI%27s_100_Years...100_Stars").get();
         doc = Jsoup.parse(htmlDom);
-        findNameLink = new FindNameLink(doc);
+        findNameAndAvaLink = new FindNameAndAvaLink(doc);
     }
 
 
     @Test
     public void findTegTbody_NotNull() {
-        Element tbodyElements = findNameLink.getTbodyElement();
+        Element tbodyElements = findNameAndAvaLink.getTbodyElement();
 
         String mess = "unitTest :: FindNameLinkTest.findTegTbody :: ERROR :: error in found Teg <tbody> ";
         assertNotNull(mess,tbodyElements);
@@ -40,7 +41,7 @@ public class FindNameLinkTest {
 
     @Test
     public void findStringFemaleMale_25(){
-        Elements scriptElements = findNameLink.getTrElements();
+        Elements scriptElements = findNameAndAvaLink.getTrElements();
 
         int expected = 7;  // в тестовом dom 5 + 2 мусор  (1 строка - 2 звезды)
         int actual = scriptElements.size();
@@ -51,7 +52,7 @@ public class FindNameLinkTest {
 
     @Test
     public void getArrNameLink_10Stars(){
-        HashMap<Element, Element> arrNameLink = findNameLink.getArrNameLink();
+        HashMap<Element, Element> arrNameLink = findNameAndAvaLink.getArrNameLink();
 
         int expected = 10;  // в тестовом dom 5 tr строк это 10 звезд
         int actual = arrNameLink.size();
@@ -63,7 +64,7 @@ public class FindNameLinkTest {
 
     @Test
     public void findNameLink(){
-        ArrayList<StarClass> arrStarClass = findNameLink.getArrStarClass();
+        ArrayList<StarClass> arrStarClass = findNameAndAvaLink.getArrStarClass();
 
         int expected = 10;  // в тестовом dom  10 звезд
         int actual = arrStarClass.size();

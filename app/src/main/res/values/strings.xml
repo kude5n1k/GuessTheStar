@@ -6,13 +6,14 @@
     <string name="stars_0">Stars 0</string>
     <string name="downloaded">downloaded…</string>
     <string name="download">Download</string>
-    <string name="check_stars">Check Stars</string>
-    <string name="clear">clear</string>
+    <string name="clearing">clearing</string>
+    <string name="need_downloaded_stars">need downloaded stars</string>
+    <string name="have_X_stars">have %d stars</string>
 
 
-    <string name="ERROR_check_variant">Ошибка проверки ответа</string>
-    <string name="ERROR_uploading_avatar">Ошибка загрузки аватарки</string>
-    <string name="ERROR_uploading_list_names">Ошибка загрузки новых имен</string>
+    <string name="ERROR_not_enough_stars">ERROR: there is not enough star data in the database</string>
+
+
 
 
     <string-array name="name">

@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.guessthestar.date.DataManager;
 import com.example.guessthestar.R;
-import com.example.guessthestar.date.stars.source.StarsRepository;
+import com.example.guessthestar.date.stars.source.StarsRepositoryManager;
 import com.example.guessthestar.ui.base.BaseActivity;
 import com.github.jinatonic.confetti.CommonConfetti;
 import com.github.jinatonic.confetti.ConfettiManager;
@@ -37,8 +37,8 @@ public class BodyTestActivity extends BaseActivity<BodyTestPresenter> implements
     @NonNull
     @Override
     protected BodyTestPresenter createPresenter() {
-        StarsRepository starsRepository = DataManager.getsInstance().getStarsRepository();
-        return new BodyTestPresenter(this, starsRepository);
+        StarsRepositoryManager starsRepositoryManager = DataManager.getsInstance().getStarsRepository();
+        return new BodyTestPresenter(this, starsRepositoryManager);
     }
 
 

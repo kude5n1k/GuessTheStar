@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.example.guessthestar.R;
-import com.example.guessthestar.date.stars.source.StarsRepository;
+import com.example.guessthestar.date.stars.source.StarsRepositoryManager;
 import com.example.guessthestar.ui.base.BasePresenter;
 import com.example.guessthestar.utils.GenerateRandom;
 
@@ -16,14 +16,14 @@ import java.util.Map;
 
 public class BodyTestPresenter extends BasePresenter<BodyTestView> {
 
-    private final StarsRepository starsRepository;
+    private final StarsRepositoryManager starsRepositoryManager;
     private int countAllStars;
     private int rightStarKey; // right answer
 
-    protected BodyTestPresenter(BodyTestView bodyTestView, StarsRepository starsRepository) {
+    protected BodyTestPresenter(BodyTestView bodyTestView, StarsRepositoryManager starsRepositoryManager) {
         super(bodyTestView);
-        this.starsRepository = starsRepository;
-        countAllStars = starsRepository.getCountStars(); // all star
+        this.starsRepositoryManager = starsRepositoryManager;
+        countAllStars = starsRepositoryManager.getCountStars(); // all star
     }
 
 
@@ -75,7 +75,8 @@ public class BodyTestPresenter extends BasePresenter<BodyTestView> {
         try {
             Glide
                     .with(view.getContextOwner())
-                    .load("https://"+starsRepository.getAddressAva(rightStarLine))
+                    .load("https://"+ starsRepositoryManager.getAddressAva(rightStarLine))
+                    .error(R.drawable.image_for_error)
                     .into(view.getImageViewAva());
         }catch (Exception ignored){}
     }
@@ -84,7 +85,7 @@ public class BodyTestPresenter extends BasePresenter<BodyTestView> {
     // list NAMEs for nuw test
     public void setNames(int[] arrStarsLines){
         try {
-            ArrayList<String> nameStarsVariants = starsRepository.getNameStarsVariants(arrStarsLines);
+            ArrayList<String> nameStarsVariants = starsRepositoryManager.getNameStarsVariants(arrStarsLines);
             view.setNames(nameStarsVariants);
         } catch (Exception ignored) {}
     }

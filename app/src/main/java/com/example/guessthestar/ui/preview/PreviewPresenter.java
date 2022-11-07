@@ -9,24 +9,23 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
-import com.example.guessthestar.date.stars.StarClass;
-import com.example.guessthestar.date.stars.source.StarsRepository;
+import com.example.guessthestar.date.stars.source.StarsRepositoryManager;
 import com.example.guessthestar.ui.base.BasePresenter;
 import com.example.guessthestar.ui.body_test.BodyTestActivity;
 
 
 public class PreviewPresenter extends BasePresenter<PreviewView>  {
 
-    private final StarsRepository starsRepository;
+    private final StarsRepositoryManager starsRepositoryManager;
     LiveData<Integer> countStarsLiveData;
     Observer<Integer> countStarsObserver;
 
-    PreviewPresenter(PreviewView previewView, StarsRepository starsRepository) {
+    PreviewPresenter(PreviewView previewView, StarsRepositoryManager starsRepositoryManager) {
         super(previewView);
-        this.starsRepository = starsRepository;
+        this.starsRepositoryManager = starsRepositoryManager;
 
 
-        countStarsLiveData = starsRepository.getCountStarsLD();
+        countStarsLiveData = starsRepositoryManager.getCountStarsLD();
         countStarsObserver = new Observer<Integer>(){
             @Override
             public void onChanged(@Nullable Integer count) {
@@ -57,7 +56,7 @@ public class PreviewPresenter extends BasePresenter<PreviewView>  {
         void downloadError(String mess);
     }
     public void downloadedStars() {
-        starsRepository.getStarsFromRemoteDataSource(new PreviewPresenterCallback(){
+        starsRepositoryManager.getStarsFromRemoteDataSource(new PreviewPresenterCallback(){
             @Override
             public void downloadError(String mess) {
                 view.sendMessage(mess);

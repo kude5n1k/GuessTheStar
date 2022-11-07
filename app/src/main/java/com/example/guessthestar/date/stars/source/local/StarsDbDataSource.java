@@ -7,7 +7,6 @@ import com.example.guessthestar.date.stars.source.local.db.StarsDao;
 import com.example.guessthestar.utils.DiskExecutor;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Executor;
 
 public class StarsDbDataSource {
@@ -161,7 +160,7 @@ public class StarsDbDataSource {
 
 
 
-    public void clearAllStars() {
+    public void clearingAllStars() {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {

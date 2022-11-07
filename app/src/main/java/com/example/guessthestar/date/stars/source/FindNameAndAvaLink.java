@@ -1,4 +1,4 @@
-package com.example.guessthestar.date.stars.source.remote.downloadInfoText.jsoup.utils;
+package com.example.guessthestar.date.stars.source;
 
 
 import com.example.guessthestar.date.stars.StarClass;
@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FindNameLink {
+public class FindNameAndAvaLink {
 
     private Element tbodyElement =null;
     private Elements trElements =null;
     private final HashMap<Element, Element> arrTdNameLink = new HashMap<>();
     ArrayList<StarClass> arrStarClass = new ArrayList<>();
 
-    public FindNameLink(Document doc) {
+    public FindNameAndAvaLink(Document doc) {
         try {
             tbodyElement = doc.getElementsByTag("tbody").last();
             trElements = tbodyElement.getElementsByTag("tr");  // делаем массив строк ж - м 25шт
