@@ -14,8 +14,6 @@ import com.example.guessthestar.date.stars.source.StarsRepository;
 import com.example.guessthestar.ui.base.BasePresenter;
 import com.example.guessthestar.ui.body_test.BodyTestActivity;
 
-import java.util.ArrayList;
-
 
 public class PreviewPresenter extends BasePresenter<PreviewView>  {
 
@@ -32,7 +30,7 @@ public class PreviewPresenter extends BasePresenter<PreviewView>  {
         countStarsObserver = new Observer<Integer>(){
             @Override
             public void onChanged(@Nullable Integer count) {
-                //Log.i("MyDEBUG","PreviewPresenter :: LiveDate :: start : count="+count );
+                Log.i("MyDEBUG","PreviewPresenter :: LiveDate :: start : count="+count );
                 resultCountStars(count);
             }
         };
@@ -49,18 +47,7 @@ public class PreviewPresenter extends BasePresenter<PreviewView>  {
 
 
     public void resultCountStars(int countStars) {
-        if (countStars <= 1)  {
-            // not Ready To Start
-            view.sendMessage("need downloaded stars");
-            view.progressUpdate(0);
-            view.isButtonStartTestEnabled(false);
-
-        }else {
-            // Ready To Start (данные есть - готовы начать)
-            view.sendMessage("have " + countStars + "  stars");
-            view.progressUpdate(countStars);
-            view.isButtonStartTestEnabled(true);
-        }
+        view.showCountStars(countStars);
     }
 
 
@@ -73,21 +60,19 @@ public class PreviewPresenter extends BasePresenter<PreviewView>  {
         starsRepository.getStarsFromRemoteDataSource(new PreviewPresenterCallback(){
             @Override
             public void downloadError(String mess) {
-                sendMessage(mess);
+                view.sendMessage(mess);
             }
         });
     }
 
 
 
-    public void clearStars(){
-        starsRepository.deleteStars();
+    public void clearingStars(){
+        starsRepositoryManager.deleteStars();
     }
 
 
-    public void sendMessage(String mess){
-        view.sendMessage(mess);
-    }
+
 
 
 
