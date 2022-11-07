@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.guessthestar.R;
 import com.example.guessthestar.date.DataManager;
-import com.example.guessthestar.date.stars.source.StarsRepository;
+import com.example.guessthestar.date.stars.source.StarsRepositoryManager;
 import com.example.guessthestar.ui.base.BaseActivity;
 
 
@@ -27,8 +27,8 @@ public class PreviewActivity extends BaseActivity<PreviewPresenter> implements P
     @NonNull
     @Override
     protected PreviewPresenter createPresenter() {
-        StarsRepository starsRepository = DataManager.getsInstance().getStarsRepository();
-        return new PreviewPresenter(this, starsRepository);
+        StarsRepositoryManager starsRepositoryManager = DataManager.getsInstance().getStarsRepository();
+        return new PreviewPresenter(this, starsRepositoryManager);
     }
 
 
@@ -65,8 +65,8 @@ public class PreviewActivity extends BaseActivity<PreviewPresenter> implements P
         presenter.downloadedStars(); // скачиваем данные по звездам
     }
 
-    public void clearStars(View view) {
-        presenter.clearStars();
+    public void clearingStars(View view) {
+        presenter.clearingStars();
     }
 
     public void startBodyTestActivity(View view) {
@@ -79,14 +79,10 @@ public class PreviewActivity extends BaseActivity<PreviewPresenter> implements P
 
     /** View (Activity <=== Presenter)  */
     @Override
-    public void sendMessage(String mess) {
-        textView.setText(mess);
-    }
-
-    @Override
-    public void progressUpdate(int progress) {
-        progressBar.setProgress(progress);
-    }
+    public void showCountStars(int count) {
+        if (count >= 3)  {
+            // Ready To Start (данные есть - готовы начать)
+            sendMessage(getString(R.string.have_X_stars, count));
 
             progressBar.setProgress(count);
 
