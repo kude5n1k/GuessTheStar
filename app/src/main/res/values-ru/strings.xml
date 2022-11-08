@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Угадай Звезду</string>
+
+    <string name="guess_the_star">Угадай Звезду</string>
+    <string name="start_test">начать</string>
+    <string name="have_error">Возникла ОШИБКА</string>
+    <string name="stars_0">Звезд: 0</string>
+    <string name="downloaded">Загрузка…</string>
+    <string name="download">Загрузить</string>
+    <string name="clearing">Очистить</string>
+    <string name="need_downloaded_stars">необходимо загрузить данные звезд</string>
+    <string name="have_X_stars">количество звезд: %d</string>
+
+
+
+    <string name="ERROR_not_enough_stars">Ошибка в базе данных не достаточно данных звезд</string>
+
+
+
+
+</resources>
