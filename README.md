@@ -5,10 +5,18 @@
 ![](https://github.com/kude5n1k/GuessTheStar/blob/master/assets/gif_v1.gif)
 
 
+[![Android OS](https://img.shields.io/badge/OS-Android-brightgreen.svg?style=flat&logo=android)]()
+[![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
+[![Language](https://img.shields.io/badge/Language-Java-brightgreen.svg?style=flat)]()
+
+
 * A simple android project that demonstrates how to implement Android Architecture Components.
 * The application is made in the form of a test for knowledge of the greatest movie stars in 100 years according to AFI.
 * Data source [wikipedia](https://en.wikipedia.org/wiki/AFI%27s_100_Years...100_Stars)
-* version 2.0.0
+* Language: en, ru, zh, es
+* build version 2.0.0
+
+
 
 ### Architectural pattern: MVP (Model–View–Presenter)
  
