@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">猜猜明星</string>
+
+    <string name="guess_the_star">猜猜明星</string>
+    <string name="start_test">开始测试</string>
+    <string name="have_error">有错误</string>
+    <string name="stars_0">星星:0</string>
+    <string name="downloaded">已下载…</string>
+    <string name="download">下载</string>
+    <string name="clearing">删除</string>
+    <string name="need_downloaded_stars">需要下载星星</string>
+    <string name="have_X_stars">星数: %d</string>
+
+
+
+    <string name="ERROR_not_enough_stars">错误：数据库中没有足够的星形数据</string>
+
+
+
+
+</resources>
