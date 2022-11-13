@@ -42,8 +42,10 @@ public class GenerateRandom {
 
     // random int, min and max inclusive
     public int generateInt(int min, int max){
-        try {
 
+        if (min >= max) throw new IllegalArgumentException("ERROR :: min must <= max");
+
+        try {
             int i = 0;
             int diff = max - min;
             Random random = new Random();
@@ -51,7 +53,7 @@ public class GenerateRandom {
             i += min;
             return i;
 
-        } catch (Exception ignored) {
+        } catch (Exception ex) {
             throw new IllegalArgumentException("min/max not valid :: min=("+min+") ; max=("+max+") ");
         }
     }

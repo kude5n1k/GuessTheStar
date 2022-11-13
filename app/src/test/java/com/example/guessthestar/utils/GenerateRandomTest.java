@@ -8,11 +8,13 @@ import org.junit.Test;
 
 public class GenerateRandomTest {
 
+
+    //проверяем, что все позиции звезд от 1 до maxCountStar
     @Test
     public void getLinesArrStarsVariants() {
         GenerateRandom generateRandom = new GenerateRandom();
 
-        int maxCountStar = 49; // допустим 50 звезд всего
+        int maxCountStar = 49; // допустим X звезд всего
         int k=0;  // подсчет легитимных line звезд (не ID)
 
         for (int i=-5; i<=maxCountStar; i++){
@@ -31,39 +33,40 @@ public class GenerateRandomTest {
         //  от 3х звезд в BD
         int expected = maxCountStar*3 - 3*2;
 
-        //проверяем, что все позиции звезд от 1 до maxCountStar
+
         assertEquals( expected, k);
     }
 
 
 
 
+    // проверка генерации ранодом int (min и max включая)
     @Test
-    public void getLineRightStar() {
-        String mess = "";
-        assertEquals(mess+":: k=",1,1 );
-        assertEquals( 1, 1);
-    }
-
-
-
-    @Test
-    public void generateInt() {
+    public void generateInt2() {
         GenerateRandom generateRandom = new GenerateRandom();
 
-        int min = 1;
-        int max = 10;
+        int min = -5;
+        int max = 5;
+        int expected = 55;
+
         int k=0;
         for (int i=min; i<=max; i++){
-            int rez = generateRandom.generateInt(1,i);
-            if (min <= rez && rez <= max) k++;
+            for (int x=min; x<=max; x++){
 
-            //System.out.println("TEST :: generateInt :: k="+k+" ::  "+min+" <= "+rez+" <= "+max);
+                try {
+                    int rez = generateRandom.generateInt(i,x);
+                    if (i <= rez && rez <= x) k++;
+
+                    //System.out.println("TEST :: generateInt :: k="+k+" ::  "+i+" <= "+rez+" <= "+x);
+                } catch (Exception ex) {
+                    //System.out.println("TEST :: generateInt :: k="+k+" ::  "+i+" <= ERROR <= "+x+ " ::  ex = " + ex );
+                }
+
+            }
         }
-        assertEquals( max, k);
+
+        assertEquals(expected, k);
     }
-
-
 
 
 
