@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ * ]
+    branches: [ master ]
 
 
 jobs:
@@ -40,7 +40,3 @@ jobs:
           name: testDebugStuff
           path: app/build/reports/tests/testDebugUnitTest/
           if-no-files-found: warn
-
-
-
-

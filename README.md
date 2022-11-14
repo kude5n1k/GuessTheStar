@@ -9,7 +9,8 @@
 [![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
 [![Language](https://img.shields.io/badge/Language-Java-brightgreen.svg?style=flat)]()
 
-![master](https://github.com/kude5n1k/GuessTheStar/workflows/UnitTests_PR_push_master/badge.svg?branch=master)
+[![UnitTests_PR_push_master](https://github.com/kude5n1k/GuessTheStar/actions/workflows/unitTests_PR_push_master.yml/badge.svg)](https://github.com/kude5n1k/GuessTheStar/actions/workflows/unitTests_PR_push_master.yml)
+
 
 
 * A simple android project that demonstrates how to implement Android Architecture Components.
