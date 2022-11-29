@@ -1,0 +1,118 @@
+name: UI_tests_PR_master
+
+on:
+  workflow_call:
+    secrets:
+      GOOGLE_SERVICES:
+        description: 'google-services.json for authenticate to Google Cloud'
+        required: true
+      FIREBASE_PROJECT_ID:
+        description: 'Firebase Project ID for authenticate to Google Cloud'
+        required: true
+
+
+jobs:
+  # Job_1 :: сборка|подготовка артефактов для androidTest
+  assemble_ui_tests_artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3   #выкачиваем
+      - uses: actions/setup-java@v2 #окружение java
+        with:
+          distribution: temurin
+          java-version: 11
+
+
+      - name: make Gradle executable
+        run: chmod +x ./gradlew
+
+      - name: bilding app-debug.apk   # само чистое приложение
+        run: ./gradlew assembleDebug
+
+      - name: bilding app-debug-androidTest.apk  # instrumentation-тесты
+        run: ./gradlew assembleDebugAndroidTest
+
+
+      - name: Upload app-debug APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
+
+      - name: Upload app-debug-androidTest APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-debug-androidTest
+          path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+          if-no-files-found: error
+
+
+
+
+  # Job_2 :: androidTest :: запуск на firebase
+  run_ui_tests_on_firebase:
+    runs-on: ubuntu-latest
+    needs: assemble_ui_tests_artifacts  #  ждём завершения Job_1
+    steps:
+      # достаем по имени те два APK которые собирали в Job_1.
+      - uses: actions/checkout@v3
+
+      - name: 1. Download app-debug APK
+        uses: actions/download-artifact@v1
+        with:
+          name: app-debug
+
+      - name: 2. Download app-debug-androidTest APK
+        uses: actions/download-artifact@v1
+        with:
+          name: app-debug-androidTest
+
+
+      # работа с Firebase
+      # GOOGLE_SERVICES - это my-application.json (чистый файл из console.cloud.google)
+      # FIREBASE_PROJECT_ID - это  my-application  (из Firebase)
+      - name: 3. Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1  # автаризация с параметрами
+        with:
+          credentials_json: ${{ secrets.GOOGLE_SERVICES }}
+          project_id: ${{ secrets.FIREBASE_PROJECT_ID }}
+
+      - name: 4. Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: 4_1 android models list
+        run: gcloud firebase test android models list
+
+
+      - name: 5. Run Instrumentation Tests in Firebase Test Lab
+        #run: gcloud firebase test android run
+        # --type instrumentation, robo, game-loop. - Тип теста для запуска
+        # --use-orchestrator  // каждый тест в своем собственном экземпляре
+        # --num-flaky-test-attempts 2  // количество повторных попыток если тест не пройден
+        # --network-profile // профиля сети при тестировании. На пример медленный интернет
+        # orientation=portrait или landscape
+        env:
+          APP_DEBUG_LOCATION: "app-debug/app-debug.apk"
+          ANDROID_TEST_LOCATION: "app-debug-androidTest/app-debug-androidTest.apk"
+          DEVICE_MODEL: NexusLowRes,version=30,locale=en,orientation=portrait
+        run: gcloud firebase test android run --type instrumentation --app $APP_DEBUG_LOCATION --test $ANDROID_TEST_LOCATION --device model=$DEVICE_MODEL --use-orchestrator --num-flaky-test-attempts 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
