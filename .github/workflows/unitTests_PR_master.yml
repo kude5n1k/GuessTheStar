@@ -1,0 +1,65 @@
+name: UnitTests_PR_master
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  # Job_1
+  unit_test_pr:
+    name: Unit test for PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checking project resources
+        uses: actions/checkout@v2
+      - name: set up JDK 11
+        uses: actions/setup-java@v1
+        with: {java-version: 1.11}
+
+
+      - name: make Gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Setup Gradle
+        run: ./gradlew test
+
+      - name: Upload html test report
+        uses: actions/upload-artifact@v2  # выкачивает html отчет по тестированию
+        with:
+          name: index.html
+          path: app/build/reports/tests/testDebugUnitTest/index.html    # HTML test result files:
+
+      - name: Upload test report directory
+        uses: actions/upload-artifact@v2  # выкачивает папку отчет по тестированию
+        with:
+          name: testDebugStuff
+          path: app/build/reports/tests/testDebugUnitTest/
+          if-no-files-found: warn
+
+
+  # Job_2
+  # если unitTest прошли -> запускаем UI test на firebase
+  call_ui_tests:
+    #  ждём завершения Job_1
+    needs: unit_test_pr
+    # условие: Pull request в ветку main из ветки, название которой начинается на release/.
+    if: startsWith(github.head_ref, 'release/') == true
+    # старт другого workflows
+    uses: ./.github/workflows/ui_Tests_PR_master.yml
+    secrets:
+      GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
+      FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+
+
+
+
+
+
+
+
+
+
+
+
+
