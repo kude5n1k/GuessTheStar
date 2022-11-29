@@ -8,8 +8,10 @@
 [![Android OS](https://img.shields.io/badge/OS-Android-brightgreen.svg?style=flat&logo=android)]()
 [![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
 [![Language](https://img.shields.io/badge/Language-Java-brightgreen.svg?style=flat)]()
-
-[![UnitTests_PR_push_master](https://github.com/kude5n1k/GuessTheStar/actions/workflows/unitTests_PR_push_master.yml/badge.svg)](https://github.com/kude5n1k/GuessTheStar/actions/workflows/unitTests_PR_push_master.yml)
+ 
+[![UnitTests_PR_master](https://github.com/kude5n1k/GuessTheStar/actions/workflows/unitTests_PR_master.yml/badge.svg?branch=master)](https://github.com/kude5n1k/GuessTheStar/actions/workflows/unitTests_PR_master.yml) 
+ 
+[![UI_tests_PR_master](https://github.com/kude5n1k/GuessTheStar/actions/workflows/ui_tests_PR_master.yml/badge.svg?branch=master)](https://github.com/kude5n1k/GuessTheStar/actions/workflows/ui_tests_PR_master.yml)
 
 
 
