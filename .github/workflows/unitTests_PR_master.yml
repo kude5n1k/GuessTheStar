@@ -46,7 +46,7 @@ jobs:
     # условие: Pull request в ветку main из ветки, название которой начинается на release/.
     if: startsWith(github.head_ref, 'release/') == true
     # старт другого workflows
-    uses: ./.github/workflows/ui_Tests_PR_master.yml
+    uses: ./.github/workflows/ui_tests_PR_master.yml
     secrets:
       GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
       FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
