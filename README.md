@@ -1,17 +1,16 @@
 <h1 align="center">Guess The Star</h1>
 
  
-![Image text](https://github.com/kude5n1k/GuessTheStar/blob/master/assets/screenshot-2022-10-07_on.png)
-![](https://github.com/kude5n1k/GuessTheStar/blob/master/assets/gif_v1.gif)
+![Image](https://github.com/kude5n1k/GuessTheStar/blob/master/assets/screenshot-2022-10-07_on.png)
+![Gif](https://github.com/kude5n1k/GuessTheStar/blob/master/assets/gif_v1.gif)
 
 
 [![Android OS](https://img.shields.io/badge/OS-Android-brightgreen.svg?style=flat&logo=android)]()
 [![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
 [![Language](https://img.shields.io/badge/Language-Java-brightgreen.svg?style=flat)]()
- 
-[![UnitTests_PR_master](https://github.com/kude5n1k/GuessTheStar/actions/workflows/unitTests_PR_master.yml/badge.svg?branch=master)](https://github.com/kude5n1k/GuessTheStar/actions/workflows/unitTests_PR_master.yml) 
- 
-[![UI_tests_PR_master](https://github.com/kude5n1k/GuessTheStar/actions/workflows/ui_tests_PR_master.yml/badge.svg?branch=master)](https://github.com/kude5n1k/GuessTheStar/actions/workflows/ui_tests_PR_master.yml)
+
+[![tests](https://github.com/kude5n1k/GuessTheStar/actions/workflows/unitTests_PR_master.yml/badge.svg)](https://github.com/kude5n1k/GuessTheStar/actions/workflows/unitTests_PR_master.yml)
+
 
 
 
